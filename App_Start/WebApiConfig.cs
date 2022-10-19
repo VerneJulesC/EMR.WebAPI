@@ -11,6 +11,9 @@ namespace EMR.WebAPI
         {
             // Web API configuration and services
 
+            // Enable CORS
+            config.EnableCors();
+
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -19,6 +22,8 @@ namespace EMR.WebAPI
                 routeTemplate: "api/{controller}/{db}/{parms}",
                 defaults: new { parms = RouteParameter.Optional }
             );
+
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
         }
     }
 }

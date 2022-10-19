@@ -1,0 +1,2 @@
+C:\Users\This PC\git\EMR.WebAPI\obj\Debug\EMR.WebAPI.csproj.AssemblyReference.cache
+C:\Users\This PC\git\EMR.WebAPI\obj\Debug\EMR.WebAPI.csproj.CoreCompileInputs.cache

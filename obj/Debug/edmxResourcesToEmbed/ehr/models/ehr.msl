@@ -1,0 +1,1068 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EMRWebAPIehrmodelsStoreContainer" CdmEntityContainer="EHRDB">
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Address)">
+        <MappingFragment StoreEntitySet="Addresses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Address_1" ColumnName="Address_1" />
+          <ScalarProperty Name="Address_2" ColumnName="Address_2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLines">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLine)">
+        <MappingFragment StoreEntitySet="ClaimLines">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="OrderLine" ColumnName="OrderLine" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="CPT" ColumnName="CPT" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Pointer" ColumnName="Pointer" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="IsEmergency" ColumnName="IsEmergency" />
+          <ScalarProperty Name="EPSDT" ColumnName="EPSDT" />
+          <ScalarProperty Name="FamilyPlanning" ColumnName="FamilyPlanning" />
+          <ScalarProperty Name="CopayExempt" ColumnName="CopayExempt" />
+          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+          <ScalarProperty Name="ClaimId" ColumnName="ClaimId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Claims">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Claim)">
+        <MappingFragment StoreEntitySet="Claims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AcceptAssignment" ColumnName="AcceptAssignment" />
+          <ScalarProperty Name="AmountBalance" ColumnName="AmountBalance" />
+          <ScalarProperty Name="AmountCopay" ColumnName="AmountCopay" />
+          <ScalarProperty Name="AmountTotal" ColumnName="AmountTotal" />
+          <ScalarProperty Name="FilingStatus" ColumnName="FilingStatus" />
+          <ScalarProperty Name="PrimaryPayerMemberID" ColumnName="PrimaryPayerMemberID" />
+          <ScalarProperty Name="SecondaryPayerMemberID" ColumnName="SecondaryPayerMemberID" />
+          <ScalarProperty Name="DiagnosisCodes" ColumnName="DiagnosisCodes" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+          <ScalarProperty Name="PlaceOfServiceId" ColumnName="PlaceOfServiceId" />
+          <ScalarProperty Name="PrimarySubscriberId" ColumnName="PrimarySubscriberId" />
+          <ScalarProperty Name="SecondarySubscriberId" ColumnName="SecondarySubscriberId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PrimaryPayerId" ColumnName="PrimaryPayerId" />
+          <ScalarProperty Name="SecondaryPayerId" ColumnName="SecondaryPayerId" />
+          <ScalarProperty Name="EmploymentRelated" ColumnName="EmploymentRelated" />
+          <ScalarProperty Name="OutsideLab" ColumnName="OutsideLab" />
+          <ScalarProperty Name="OutsideLabCharges" ColumnName="OutsideLabCharges" />
+          <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+          <ScalarProperty Name="DateOfService" ColumnName="DateOfService" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="RenderingProviderId" ColumnName="RenderingProviderId" />
+          <ScalarProperty Name="BillingProviderId" ColumnName="BillingProviderId" />
+          <ScalarProperty Name="AssignBenefits" ColumnName="AssignBenefits" />
+          <ScalarProperty Name="AllowRelease" ColumnName="AllowRelease" />
+          <ScalarProperty Name="HasSignature" ColumnName="HasSignature" />
+          <ScalarProperty Name="SpecialProgram" ColumnName="SpecialProgram" />
+          <ScalarProperty Name="DelayReason" ColumnName="DelayReason" />
+          <ScalarProperty Name="NoteType" ColumnName="NoteType" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="HomeBound" ColumnName="HomeBound" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="ClaimPayerType" ColumnName="ClaimPayerType" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CPTCodes">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.CPTCode)">
+        <MappingFragment StoreEntitySet="CPTCodes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facilities">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Facility)">
+        <MappingFragment StoreEntitySet="Facilities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
+          <ScalarProperty Name="NPI" ColumnName="NPI" />
+          <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+          <ScalarProperty Name="Address_1" ColumnName="Address_1" />
+          <ScalarProperty Name="Address_2" ColumnName="Address_2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="PaytoAddress_1" ColumnName="PaytoAddress_1" />
+          <ScalarProperty Name="PaytoAddress_2" ColumnName="PaytoAddress_2" />
+          <ScalarProperty Name="PaytoCity" ColumnName="PaytoCity" />
+          <ScalarProperty Name="PaytoState" ColumnName="PaytoState" />
+          <ScalarProperty Name="PaytoZip" ColumnName="PaytoZip" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="BillUnder" ColumnName="BillUnder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ICDCodes">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ICDCode)">
+        <MappingFragment StoreEntitySet="ICDCodes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payers">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Payer)">
+        <MappingFragment StoreEntitySet="Payers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Phone_1" ColumnName="Phone_1" />
+          <ScalarProperty Name="Phone_2" ColumnName="Phone_2" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="PayerId" ColumnName="PayerId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="Address_1" ColumnName="Address_1" />
+          <ScalarProperty Name="Address_2" ColumnName="Address_2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modifiers">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Modifier)">
+        <MappingFragment StoreEntitySet="Modifiers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Patient)">
+        <MappingFragment StoreEntitySet="Patients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="IsDeceased" ColumnName="IsDeceased" />
+          <ScalarProperty Name="DateOfDeath" ColumnName="DateOfDeath" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="IsPregnant" ColumnName="IsPregnant" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Address_1" ColumnName="Address_1" />
+          <ScalarProperty Name="Address_2" ColumnName="Address_2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Providers">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Provider)">
+        <MappingFragment StoreEntitySet="Providers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EIN" ColumnName="EIN" />
+          <ScalarProperty Name="SSN" ColumnName="SSN" />
+          <ScalarProperty Name="NPI" ColumnName="NPI" />
+          <ScalarProperty Name="License" ColumnName="License" />
+          <ScalarProperty Name="UPIN" ColumnName="UPIN" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="TaxonomyCodeId" ColumnName="TaxonomyCodeId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Phone_1" ColumnName="Phone_1" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Phone_2" ColumnName="Phone_2" />
+          <ScalarProperty Name="Address_1" ColumnName="Address_1" />
+          <ScalarProperty Name="Address_2" ColumnName="Address_2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="IsCompany" ColumnName="IsCompany" />
+          <ScalarProperty Name="Credential" ColumnName="Credential" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlaceOfServices">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.PlaceOfService)">
+        <MappingFragment StoreEntitySet="PlaceOfServices">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaxonomyCodes">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.TaxonomyCode)">
+        <MappingFragment StoreEntitySet="TaxonomyCodes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Grouping" ColumnName="Grouping" />
+          <ScalarProperty Name="Classification" ColumnName="Classification" />
+          <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+          <ScalarProperty Name="Definition" ColumnName="Definition" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subscribers">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Subscriber)">
+        <MappingFragment StoreEntitySet="Subscribers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="PrimaryMemberID" ColumnName="PrimaryMemberID" />
+          <ScalarProperty Name="SecondaryMemberID" ColumnName="SecondaryMemberID" />
+          <ScalarProperty Name="PrimaryExpiryDate" ColumnName="PrimaryExpiryDate" />
+          <ScalarProperty Name="SecondaryExpiryDate" ColumnName="SecondaryExpiryDate" />
+          <ScalarProperty Name="PrimaryPayerId" ColumnName="PrimaryPayerId" />
+          <ScalarProperty Name="SecondaryPayerId" ColumnName="SecondaryPayerId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Phone_1" ColumnName="Phone_1" />
+          <ScalarProperty Name="Phone_2" ColumnName="Phone_2" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Address_1" ColumnName="Address_1" />
+          <ScalarProperty Name="Address_2" ColumnName="Address_2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="GroupNumber" ColumnName="GroupNumber" />
+          <ScalarProperty Name="PrimaryPayerType" ColumnName="PrimaryPayerType" />
+          <ScalarProperty Name="SecondaryPayerType" ColumnName="SecondaryPayerType" />
+          <ScalarProperty Name="IsDeceased" ColumnName="IsDeceased" />
+          <ScalarProperty Name="DateOfDeath" ColumnName="DateOfDeath" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="IsPregnant" ColumnName="IsPregnant" />
+          <ScalarProperty Name="SSN" ColumnName="SSN" />
+          <ScalarProperty Name="PrimaryInsurerId" ColumnName="PrimaryInsurerId" />
+          <ScalarProperty Name="SecondaryInsurerId" ColumnName="SecondaryInsurerId" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemNotes">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.SystemNote)">
+        <MappingFragment StoreEntitySet="SystemNotes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+          <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IsInactive" ColumnName="IsInactive" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
+          <ScalarProperty Name="DefaultAccount" ColumnName="DefaultAccount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimDates">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimDate)">
+        <MappingFragment StoreEntitySet="ClaimDates">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OnsetOfCurrent" ColumnName="OnsetOfCurrent" />
+          <ScalarProperty Name="InitialTreatment" ColumnName="InitialTreatment" />
+          <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />
+          <ScalarProperty Name="Acute" ColumnName="Acute" />
+          <ScalarProperty Name="LastMenstrual" ColumnName="LastMenstrual" />
+          <ScalarProperty Name="LastXRay" ColumnName="LastXRay" />
+          <ScalarProperty Name="HearingVision" ColumnName="HearingVision" />
+          <ScalarProperty Name="LastWorked" ColumnName="LastWorked" />
+          <ScalarProperty Name="ReturnToWork" ColumnName="ReturnToWork" />
+          <ScalarProperty Name="Admission" ColumnName="Admission" />
+          <ScalarProperty Name="Discharge" ColumnName="Discharge" />
+          <ScalarProperty Name="Assumed" ColumnName="Assumed" />
+          <ScalarProperty Name="Property" ColumnName="Property" />
+          <ScalarProperty Name="Repricer" ColumnName="Repricer" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="Other" ColumnName="Other" />
+          <ScalarProperty Name="DisabilityStart" ColumnName="DisabilityStart" />
+          <ScalarProperty Name="DisabilityEnd" ColumnName="DisabilityEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineDMERCs">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineDMERC)">
+        <MappingFragment StoreEntitySet="ClaimLineDMERCs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DMERC_Response" ColumnName="DMERC_Response" />
+          <ScalarProperty Name="DMERC_Code" ColumnName="DMERC_Code" />
+          <ScalarProperty Name="DMERC_Code2" ColumnName="DMERC_Code2" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineDates">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineDate)">
+        <MappingFragment StoreEntitySet="ClaimLineDates">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Prescription" ColumnName="Prescription" />
+          <ScalarProperty Name="Certification" ColumnName="Certification" />
+          <ScalarProperty Name="BeginTherapy" ColumnName="BeginTherapy" />
+          <ScalarProperty Name="LastCertification" ColumnName="LastCertification" />
+          <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />
+          <ScalarProperty Name="Test" ColumnName="Test" />
+          <ScalarProperty Name="Shipped" ColumnName="Shipped" />
+          <ScalarProperty Name="LastXRay" ColumnName="LastXRay" />
+          <ScalarProperty Name="InitialTreatment" ColumnName="InitialTreatment" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="ServiceFrom" ColumnName="ServiceFrom" />
+          <ScalarProperty Name="ServiceTo" ColumnName="ServiceTo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineReferences">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineReference)">
+        <MappingFragment StoreEntitySet="ClaimLineReferences">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Repriced" ColumnName="Repriced" />
+          <ScalarProperty Name="AdjustedRepriced" ColumnName="AdjustedRepriced" />
+          <ScalarProperty Name="Prior" ColumnName="Prior" />
+          <ScalarProperty Name="PriorIdentifier" ColumnName="PriorIdentifier" />
+          <ScalarProperty Name="PriorOtherPayer" ColumnName="PriorOtherPayer" />
+          <ScalarProperty Name="ControlNumber" ColumnName="ControlNumber" />
+          <ScalarProperty Name="Mammography" ColumnName="Mammography" />
+          <ScalarProperty Name="CLIA" ColumnName="CLIA" />
+          <ScalarProperty Name="CLIAFacility" ColumnName="CLIAFacility" />
+          <ScalarProperty Name="Immunization" ColumnName="Immunization" />
+          <ScalarProperty Name="Referral" ColumnName="Referral" />
+          <ScalarProperty Name="ReferralIdentifier" ColumnName="ReferralIdentifier" />
+          <ScalarProperty Name="ReferralOtherPayer" ColumnName="ReferralOtherPayer" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineSupplementals">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineSupplemental)">
+        <MappingFragment StoreEntitySet="ClaimLineSupplementals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SalesTaxAmount" ColumnName="SalesTaxAmount" />
+          <ScalarProperty Name="PostageAmount" ColumnName="PostageAmount" />
+          <ScalarProperty Name="FileInfo" ColumnName="FileInfo" />
+          <ScalarProperty Name="NoteCode" ColumnName="NoteCode" />
+          <ScalarProperty Name="NoteDescription" ColumnName="NoteDescription" />
+          <ScalarProperty Name="ThirdPartyCode" ColumnName="ThirdPartyCode" />
+          <ScalarProperty Name="ThirdPartyDescription" ColumnName="ThirdPartyDescription" />
+          <ScalarProperty Name="PurchaseCode" ColumnName="PurchaseCode" />
+          <ScalarProperty Name="PurchaseAmount" ColumnName="PurchaseAmount" />
+          <ScalarProperty Name="RejectCode" ColumnName="RejectCode" />
+          <ScalarProperty Name="ComplianceCode" ColumnName="ComplianceCode" />
+          <ScalarProperty Name="ExceptionCode" ColumnName="ExceptionCode" />
+          <ScalarProperty Name="HospiceCode" ColumnName="HospiceCode" />
+          <ScalarProperty Name="ObsAnesUnits" ColumnName="ObsAnesUnits" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineDrugs">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineDrug)">
+        <MappingFragment StoreEntitySet="ClaimLineDrugs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Qualifier" ColumnName="Qualifier" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="PrescriptionCode" ColumnName="PrescriptionCode" />
+          <ScalarProperty Name="PrescriptionNumber" ColumnName="PrescriptionNumber" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineAttachments">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineAttachment)">
+        <MappingFragment StoreEntitySet="ClaimLineAttachments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineDurables">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineDurable)">
+        <MappingFragment StoreEntitySet="ClaimLineDurables">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+          <ScalarProperty Name="Procedure" ColumnName="Procedure" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Rental" ColumnName="Rental" />
+          <ScalarProperty Name="Purchase" ColumnName="Purchase" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="CertCode" ColumnName="CertCode" />
+          <ScalarProperty Name="CertQuantity" ColumnName="CertQuantity" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineAmbulances">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineAmbulance)">
+        <MappingFragment StoreEntitySet="ClaimLineAmbulances">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="RoundTrip" ColumnName="RoundTrip" />
+          <ScalarProperty Name="Stretcher" ColumnName="Stretcher" />
+          <ScalarProperty Name="CertCode_1" ColumnName="CertCode_1" />
+          <ScalarProperty Name="CertCode_2" ColumnName="CertCode_2" />
+          <ScalarProperty Name="CertCode_3" ColumnName="CertCode_3" />
+          <ScalarProperty Name="CertCode_4" ColumnName="CertCode_4" />
+          <ScalarProperty Name="CertCode_5" ColumnName="CertCode_5" />
+          <ScalarProperty Name="CertResponse" ColumnName="CertResponse" />
+          <ScalarProperty Name="PatientCount" ColumnName="PatientCount" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineContracts">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineContract)">
+        <MappingFragment StoreEntitySet="ClaimLineContracts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Percent" ColumnName="Percent" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineDialysis">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineDialysis)">
+        <MappingFragment StoreEntitySet="ClaimLineDialysis">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Qualifier" ColumnName="Qualifier" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLinePricings">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLinePricing)">
+        <MappingFragment StoreEntitySet="ClaimLinePricings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Method" ColumnName="Method" />
+          <ScalarProperty Name="AmountAllowed" ColumnName="AmountAllowed" />
+          <ScalarProperty Name="AmountSavings" ColumnName="AmountSavings" />
+          <ScalarProperty Name="OrgID" ColumnName="OrgID" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="AmbGroup" ColumnName="AmbGroup" />
+          <ScalarProperty Name="AmbGroupAmount" ColumnName="AmbGroupAmount" />
+          <ScalarProperty Name="ProductQualifier" ColumnName="ProductQualifier" />
+          <ScalarProperty Name="HCPCS" ColumnName="HCPCS" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ComplianceCode" ColumnName="ComplianceCode" />
+          <ScalarProperty Name="ExceptionCode" ColumnName="ExceptionCode" />
+          <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimLineProducts">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimLineProduct)">
+        <MappingFragment StoreEntitySet="ClaimLineProducts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Qualifier" ColumnName="Qualifier" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Submitters">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Submitter)">
+        <MappingFragment StoreEntitySet="Submitters">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="OrgName" ColumnName="OrgName" />
+          <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Receivers">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Receiver)">
+        <MappingFragment StoreEntitySet="Receivers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Batches">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Batch)">
+        <MappingFragment StoreEntitySet="Batches">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+          <ScalarProperty Name="ClaimIDs" ColumnName="ClaimIDs" />
+          <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayToes">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.PayTo)">
+        <MappingFragment StoreEntitySet="PayToes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Address_1" ColumnName="Address_1" />
+          <ScalarProperty Name="Address_2" ColumnName="Address_2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BillingProviderId" ColumnName="BillingProviderId" />
+          <ScalarProperty Name="RenderingProviderId" ColumnName="RenderingProviderId" />
+          <ScalarProperty Name="IsCompany" ColumnName="IsCompany" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimAccidents">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimAccident)">
+        <MappingFragment StoreEntitySet="ClaimAccidents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Causes" ColumnName="Causes" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimSupplementals">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimSupplemental)">
+        <MappingFragment StoreEntitySet="ClaimSupplementals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AttachmentType" ColumnName="AttachmentType" />
+          <ScalarProperty Name="TransmissionType" ColumnName="TransmissionType" />
+          <ScalarProperty Name="AttachmentNumber" ColumnName="AttachmentNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimContracts">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimContract)">
+        <MappingFragment StoreEntitySet="ClaimContracts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Percent" ColumnName="Percent" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimReferences">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimReference)">
+        <MappingFragment StoreEntitySet="ClaimReferences">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AuthorizationException" ColumnName="AuthorizationException" />
+          <ScalarProperty Name="MandatoryMedicare" ColumnName="MandatoryMedicare" />
+          <ScalarProperty Name="Mammography" ColumnName="Mammography" />
+          <ScalarProperty Name="Referral" ColumnName="Referral" />
+          <ScalarProperty Name="Prior" ColumnName="Prior" />
+          <ScalarProperty Name="ClaimControl" ColumnName="ClaimControl" />
+          <ScalarProperty Name="Repriced" ColumnName="Repriced" />
+          <ScalarProperty Name="AdjustedRepriced" ColumnName="AdjustedRepriced" />
+          <ScalarProperty Name="InvestigationalDevice" ColumnName="InvestigationalDevice" />
+          <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+          <ScalarProperty Name="MedicalRecord" ColumnName="MedicalRecord" />
+          <ScalarProperty Name="Demonstration" ColumnName="Demonstration" />
+          <ScalarProperty Name="CarePlanOversight" ColumnName="CarePlanOversight" />
+          <ScalarProperty Name="CLIA" ColumnName="CLIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimAmbulances">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimAmbulance)">
+        <MappingFragment StoreEntitySet="ClaimAmbulances">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="RoundTrip" ColumnName="RoundTrip" />
+          <ScalarProperty Name="Stretcher" ColumnName="Stretcher" />
+          <ScalarProperty Name="CertCode_1" ColumnName="CertCode_1" />
+          <ScalarProperty Name="CertCode_2" ColumnName="CertCode_2" />
+          <ScalarProperty Name="CertCode_3" ColumnName="CertCode_3" />
+          <ScalarProperty Name="CertCode_4" ColumnName="CertCode_4" />
+          <ScalarProperty Name="CertCode_5" ColumnName="CertCode_5" />
+          <ScalarProperty Name="CertResponse" ColumnName="CertResponse" />
+          <ScalarProperty Name="PatientCount" ColumnName="PatientCount" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimSpinals">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimSpinal)">
+        <MappingFragment StoreEntitySet="ClaimSpinals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description_1" ColumnName="Description_1" />
+          <ScalarProperty Name="Description_2" ColumnName="Description_2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimConditions">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimCondition)">
+        <MappingFragment StoreEntitySet="ClaimConditions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EPSDT" ColumnName="EPSDT" />
+          <ScalarProperty Name="Anesthesia" ColumnName="Anesthesia" />
+          <ScalarProperty Name="Conditions" ColumnName="Conditions" />
+          <ScalarProperty Name="Vision" ColumnName="Vision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimRepricings">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimRepricing)">
+        <MappingFragment StoreEntitySet="ClaimRepricings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Methodology" ColumnName="Methodology" />
+          <ScalarProperty Name="AllowedAmount" ColumnName="AllowedAmount" />
+          <ScalarProperty Name="SavingAmount" ColumnName="SavingAmount" />
+          <ScalarProperty Name="OrgIdentifier" ColumnName="OrgIdentifier" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="AmbulatoryGroup" ColumnName="AmbulatoryGroup" />
+          <ScalarProperty Name="AmbulatoryAmount" ColumnName="AmbulatoryAmount" />
+          <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
+          <ScalarProperty Name="PolicyCompliance" ColumnName="PolicyCompliance" />
+          <ScalarProperty Name="Exception" ColumnName="Exception" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClaimAmounts">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ClaimAmount)">
+        <MappingFragment StoreEntitySet="ClaimAmounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PayerPaid" ColumnName="PayerPaid" />
+          <ScalarProperty Name="NonCovered" ColumnName="NonCovered" />
+          <ScalarProperty Name="PatientLiability" ColumnName="PatientLiability" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Insurers">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Insurer)">
+        <MappingFragment StoreEntitySet="Insurers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Address_1" ColumnName="Address_1" />
+          <ScalarProperty Name="Address_2" ColumnName="Address_2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Phone_1" ColumnName="Phone_1" />
+          <ScalarProperty Name="Phone_2" ColumnName="Phone_2" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.UserRole)">
+        <MappingFragment StoreEntitySet="UserRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Account)">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="IsInactive" ColumnName="IsInactive" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.Payment)">
+        <MappingFragment StoreEntitySet="Payments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="AmountTotal" ColumnName="AmountTotal" />
+          <ScalarProperty Name="AmountPayment" ColumnName="AmountPayment" />
+          <ScalarProperty Name="AmountCopay" ColumnName="AmountCopay" />
+          <ScalarProperty Name="AmountDeductible" ColumnName="AmountDeductible" />
+          <ScalarProperty Name="AmountBalance" ColumnName="AmountBalance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentLines">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.PaymentLine)">
+        <MappingFragment StoreEntitySet="PaymentLines">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ClaimLineId" ColumnName="ClaimLineId" />
+          <ScalarProperty Name="AmountPayment" ColumnName="AmountPayment" />
+          <ScalarProperty Name="AmountCopay" ColumnName="AmountCopay" />
+          <ScalarProperty Name="AmountDeductible" ColumnName="AmountDeductible" />
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ErrorCodes">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ErrorCode)">
+        <MappingFragment StoreEntitySet="ErrorCodes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ARTo" ColumnName="ARTo" />
+          <ScalarProperty Name="EditBatch" ColumnName="EditBatch" />
+          <ScalarProperty Name="ToPayer" ColumnName="ToPayer" />
+          <ScalarProperty Name="ToPatient" ColumnName="ToPatient" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ErrorMessages">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.ErrorMessage)">
+        <MappingFragment StoreEntitySet="ErrorMessages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserPreferences">
+      <EntityTypeMapping TypeName="IsTypeOf(EMR.WebAPI.ehr.models.UserPreference)">
+        <MappingFragment StoreEntitySet="UserPreferences">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="SystemNoteKey" ColumnName="SystemNoteKey" />
+          <ScalarProperty Name="RenderingProviderId" ColumnName="RenderingProviderId" />
+          <ScalarProperty Name="BillingProviderId" ColumnName="BillingProviderId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="PlaceOfServiceId" ColumnName="PlaceOfServiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ClaimLineDateClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLineDateClaimLine" StoreEntitySet="ClaimLineDates">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineDate">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLineRefClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLineRefClaimLine" StoreEntitySet="ClaimLineReferences">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineRef">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLineDrugClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLineDrugClaimLine" StoreEntitySet="ClaimLineDrugs">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineDrug">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLineAttachmentClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLineAttachmentClaimLine" StoreEntitySet="ClaimLineAttachments">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineAttachment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLineDurableClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLineDurableClaimLine" StoreEntitySet="ClaimLineDurables">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineDurable">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLineContractClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLineContractClaimLine" StoreEntitySet="ClaimLineContracts">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineContract">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLineDialysisClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLineDialysisClaimLine" StoreEntitySet="ClaimLineDialysis">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineDialysis">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLinePricingClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLinePricingClaimLine" StoreEntitySet="ClaimLinePricings">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLinePricing">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLineProductClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLineProductClaimLine" StoreEntitySet="ClaimLineProducts">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineProduct">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLineAmbulanceClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLineAmbulanceClaimLine" StoreEntitySet="ClaimLineAmbulances">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineAmbulance">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLineSupplementalClaimLine" TypeName="EMR.WebAPI.ehr.models.ClaimLineSupplementalClaimLine" StoreEntitySet="ClaimLineSupplementals">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLine_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineSupplemental">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimDateClaim" TypeName="EMR.WebAPI.ehr.models.ClaimDateClaim" StoreEntitySet="Claims">
+      <EndProperty Name="ClaimDate">
+        <ScalarProperty Name="Id" ColumnName="Dates_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Dates_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AddressProvider" TypeName="EMR.WebAPI.ehr.models.AddressProvider" StoreEntitySet="AddressProvider">
+      <EndProperty Name="Address">
+        <ScalarProperty Name="Id" ColumnName="Addresses_Id" />
+      </EndProperty>
+      <EndProperty Name="Provider">
+        <ScalarProperty Name="Id" ColumnName="AddressProvider_Address_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AddressSubscriber" TypeName="EMR.WebAPI.ehr.models.AddressSubscriber" StoreEntitySet="AddressSubscriber">
+      <EndProperty Name="Address">
+        <ScalarProperty Name="Id" ColumnName="Addresses_Id" />
+      </EndProperty>
+      <EndProperty Name="Subscriber">
+        <ScalarProperty Name="Id" ColumnName="AddressSubscriber_Address_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimLineClaimLineDMERC" TypeName="EMR.WebAPI.ehr.models.ClaimLineClaimLineDMERC" StoreEntitySet="ClaimLineDMERCs">
+      <EndProperty Name="ClaimLine">
+        <ScalarProperty Name="Id" ColumnName="ClaimLineClaimLineDMERC_ClaimLineDMERC_Id" />
+      </EndProperty>
+      <EndProperty Name="ClaimLineDMERC">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimAccidentClaim" TypeName="EMR.WebAPI.ehr.models.ClaimAccidentClaim" StoreEntitySet="Claims">
+      <EndProperty Name="ClaimAccident">
+        <ScalarProperty Name="Id" ColumnName="Accident_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Accident_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimSupplementalClaim" TypeName="EMR.WebAPI.ehr.models.ClaimSupplementalClaim" StoreEntitySet="Claims">
+      <EndProperty Name="ClaimSupplemental">
+        <ScalarProperty Name="Id" ColumnName="Supplemental_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Supplemental_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimContractClaim" TypeName="EMR.WebAPI.ehr.models.ClaimContractClaim" StoreEntitySet="Claims">
+      <EndProperty Name="ClaimContract">
+        <ScalarProperty Name="Id" ColumnName="Contract_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Contract_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimReferenceClaim" TypeName="EMR.WebAPI.ehr.models.ClaimReferenceClaim" StoreEntitySet="Claims">
+      <EndProperty Name="ClaimReference">
+        <ScalarProperty Name="Id" ColumnName="Reference_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Reference_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimAmbulanceClaim" TypeName="EMR.WebAPI.ehr.models.ClaimAmbulanceClaim" StoreEntitySet="Claims">
+      <EndProperty Name="ClaimAmbulance">
+        <ScalarProperty Name="Id" ColumnName="Ambulance_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Ambulance_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimSpinalClaim" TypeName="EMR.WebAPI.ehr.models.ClaimSpinalClaim" StoreEntitySet="Claims">
+      <EndProperty Name="ClaimSpinal">
+        <ScalarProperty Name="Id" ColumnName="Spinal_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Spinal_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimConditionClaim" TypeName="EMR.WebAPI.ehr.models.ClaimConditionClaim" StoreEntitySet="Claims">
+      <EndProperty Name="ClaimCondition">
+        <ScalarProperty Name="Id" ColumnName="Condition_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Condition_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimRepricingClaim" TypeName="EMR.WebAPI.ehr.models.ClaimRepricingClaim" StoreEntitySet="Claims">
+      <EndProperty Name="ClaimRepricing">
+        <ScalarProperty Name="Id" ColumnName="Repricing_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Repricing_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClaimAmountClaim" TypeName="EMR.WebAPI.ehr.models.ClaimAmountClaim" StoreEntitySet="Claims">
+      <EndProperty Name="ClaimAmount">
+        <ScalarProperty Name="Id" ColumnName="Amounts_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Amounts_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PatientSubscriber" TypeName="EMR.WebAPI.ehr.models.PatientSubscriber" StoreEntitySet="PatientSubscriber">
+      <EndProperty Name="Patient">
+        <ScalarProperty Name="Id" ColumnName="Patients_Id" />
+      </EndProperty>
+      <EndProperty Name="Subscriber">
+        <ScalarProperty Name="Id" ColumnName="PatientSubscriber_Patient_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProviderProvider" TypeName="EMR.WebAPI.ehr.models.ProviderProvider" StoreEntitySet="ProviderProvider">
+      <EndProperty Name="Provider">
+        <ScalarProperty Name="Id" ColumnName="ProviderProvider_Provider1_Id" />
+      </EndProperty>
+      <EndProperty Name="Provider1">
+        <ScalarProperty Name="Id" ColumnName="Providers_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ErrorCodeErrorMessage" TypeName="EMR.WebAPI.ehr.models.ErrorCodeErrorMessage" StoreEntitySet="ErrorMessages">
+      <EndProperty Name="ErrorCode">
+        <ScalarProperty Name="Id" ColumnName="ErrorCodeErrorMessage_ErrorMessage_Id" />
+      </EndProperty>
+      <EndProperty Name="ErrorMessage">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="ErrorCodeErrorMessage_ErrorMessage_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ErrorCodePayment" TypeName="EMR.WebAPI.ehr.models.ErrorCodePayment" StoreEntitySet="Payments">
+      <EndProperty Name="ErrorCode">
+        <ScalarProperty Name="Id" ColumnName="ErrorCode_Id" />
+      </EndProperty>
+      <EndProperty Name="Payment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="ErrorCode_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PaymentClaim" TypeName="EMR.WebAPI.ehr.models.PaymentClaim" StoreEntitySet="Claims">
+      <EndProperty Name="Payment">
+        <ScalarProperty Name="Id" ColumnName="Payment_Id" />
+      </EndProperty>
+      <EndProperty Name="Claim">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Payment_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserAccount" TypeName="EMR.WebAPI.ehr.models.UserAccount" StoreEntitySet="UserAccount">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="UserAccount_Account_Id" />
+      </EndProperty>
+      <EndProperty Name="Account">
+        <ScalarProperty Name="Id" ColumnName="Accounts_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

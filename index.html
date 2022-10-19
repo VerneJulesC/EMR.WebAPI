@@ -28,7 +28,7 @@
     <script type="text/javascript" src="ehr/js/lib/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="ehr/js/lib/ngDialog.min.js"></script>
     <script type="text/javascript" src="ehr/js/lib/datepicker.min.js"></script>
-
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
     <!--<base href="/" />-->
 </head>
 <body ng-controller="ehrAppController as appCtrl">
@@ -38,9 +38,11 @@
         <a ui-sref="subscribers"><i class="fa fa-user"></i> Subscribers</a>
         <a ui-sref="claims"><i class="fa fa-file-medical-alt"></i> Claims</a>
         <a ui-sref="batches"><i class="fa fa-university"></i> Batches</a>
+        <a ui-sref="reports"><i class="fa fa-chart-line"></i> Reports</a>
         <!--<a ui-sref="payments"><i class="fa fa-dollar-sign"></i> Payments</a>-->
         <a ui-sref="setup"><i class="fa fa-cog"></i> Setup</a>
         <a ui-sref="account"><i class="fa fa-user-circle"></i> Account</a>
+        <!--<a ui-sref="schedule"><i class="fa fa-calendar"></i> Schedule</a>-->
 
         <div class="ehr-navbar-right">
             <a ui-sref="userlabel">Hello, {{appCtrl.getUserName()}}</a>
@@ -73,6 +75,7 @@
     <script type="text/javascript" src="ehr/claims/ehr.claims.controller.js"></script>
     <script type="text/javascript" src="ehr/batches/ehr.batches.controller.js"></script>
     <script type="text/javascript" src="ehr/payments/ehr.payments.controller.js"></script>
+    <script type="text/javascript" src="ehr/reports/ehr.reports.controller.js"></script>
     <script type="text/javascript" src="ehr/setup/ehr.setup.controller.js"></script>
     <script type="text/javascript" src="ehr/account/ehr.account.controller.js"></script>
     <script type="text/javascript" src="ehr/account/ehr.login.controller.js"></script>

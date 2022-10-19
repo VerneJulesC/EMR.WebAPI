@@ -64,7 +64,7 @@
                                             <th class="col-sm-4">Acct</th>
                                             <th class="col-sm-4">Date</th>
                                             <!--<th>CPT</th>-->
-                                            <th class="col-sm-4 text-right">Payment ($)</th>
+                                            <th class="col-sm-4 text-right">Charges ($)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -375,8 +375,33 @@
                                             </div>
                                         </div>
                                         <div class="ehr-fld-input-popup-btn">
-                                            <button>
-                                                <i class="fa fa-window-restore"></i>
+                                            <button type="button"
+                                                    ng-if="clmProvCtrl.claim.RenderingProvider != null"
+                                                    ng-click="clmProvCtrl.clearField('REN')">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Referring Provider -->
+                                <div class="ehr-row clearfix">
+                                    <label class="col-sm-12 ehr-fld-label">Referring Provider</label>
+                                    <div class="col-sm-12 ehr-fld-input-popup">
+                                        <div class="ehr-fld-input-icon-btn">
+                                            <input type="text" class="ehr-fld-input-disabled" maxlength="100" disabled
+                                                   ng-model="clmProvCtrl.referringProvFullName" />
+                                            <div class="ehr-fld-icon">
+                                                <button type="button" ng-click="clmProvCtrl.openListModal('RefProviders', 'provider')">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="ehr-fld-input-popup-btn">
+                                            <button type="button"
+                                                    ng-if="clmProvCtrl.claim.ReferringProvider != null"
+                                                    ng-click="clmProvCtrl.clearField('REF')">
+                                                <i class="fa fa-times"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -396,8 +421,10 @@
                                             </div>
                                         </div>
                                         <div class="ehr-fld-input-popup-btn">
-                                            <button>
-                                                <i class="fa fa-window-restore"></i>
+                                            <button type="button"
+                                                    ng-if="clmProvCtrl.claim.BillingProvider != null"
+                                                    ng-click="clmProvCtrl.clearField('GRP')">
+                                                <i class="fa fa-times"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -417,8 +444,10 @@
                                             </div>
                                         </div>
                                         <div class="ehr-fld-input-popup-btn">
-                                            <button>
-                                                <i class="fa fa-window-restore"></i>
+                                            <button type="button"
+                                                    ng-if="clmProvCtrl.claim.Facility != null"
+                                                    ng-click="clmProvCtrl.clearField('FAC')">
+                                                <i class="fa fa-times"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -438,8 +467,10 @@
                                             </div>
                                         </div>
                                         <div class="ehr-fld-input-popup-btn">
-                                            <button>
-                                                <i class="fa fa-window-restore"></i>
+                                            <button type="button"
+                                                    ng-if="clmProvCtrl.claim.PlaceOfService != null"
+                                                    ng-click="clmProvCtrl.clearField('POS')">
+                                                <i class="fa fa-times"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -533,7 +564,7 @@
                         </tr>
 
                         <!-- Claim line repeater -->
-                        <tr class="ehr-table-row" ng-repeat="line in clmLinesCtrl.claim.ClaimLines">
+                        <tr ng-repeat="line in clmLinesCtrl.claim.ClaimLines" ng-class="$index % 2 == 0 && 'ehr-table-row' || 'ehr-table-row even'">
                             <td class="col-sm-1">
                                 <input type="text" class="ehr-line-input" disabled
                                        ng-model="line.StartDate" />

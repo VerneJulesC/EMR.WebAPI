@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\DEV\PROJECTS\EMR.WebAPI\ehr\models\ehrAuth.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\This PC\git\EMR.WebAPI\ehr\models\ehrAuth.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

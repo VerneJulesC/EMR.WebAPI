@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ehrAuth" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ehrAuthContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users1" EntityType="ehrAuth.User" />
+    <EntitySet Name="Roles" EntityType="ehrAuth.Role" />
+    <AssociationSet Name="RoleUser" Association="ehrAuth.RoleUser">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users1" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" DefaultValue="False" />
+    <NavigationProperty Name="Roles" Relationship="ehrAuth.RoleUser" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Users" Relationship="ehrAuth.RoleUser" FromRole="Role" ToRole="User" />
+    <Property Name="DB" Type="String" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="RoleUser">
+    <End Type="ehrAuth.Role" Role="Role" Multiplicity="*" />
+    <End Type="ehrAuth.User" Role="User" Multiplicity="*" />
+  </Association>
+</Schema>

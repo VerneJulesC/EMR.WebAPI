@@ -1,0 +1,1334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EMR.WebAPI.ehr.models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Address_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Zip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SystemNoteKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ClaimLine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Modifier" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Unit" Type="String" DefaultValue="UN" />
+    <Property Name="OrderLine" Type="Int32" Nullable="false" />
+    <Property Name="SystemNoteKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CPT" Type="String" />
+    <Property Name="Amount" Type="Decimal" DefaultValue="0" Scale="2" />
+    <Property Name="Pointer" Type="String" />
+    <Property Name="Quantity" Type="Decimal" />
+    <Property Name="IsEmergency" Type="Boolean" DefaultValue="False" />
+    <Property Name="EPSDT" Type="Boolean" DefaultValue="False" />
+    <Property Name="FamilyPlanning" Type="Boolean" DefaultValue="False" />
+    <Property Name="CopayExempt" Type="Boolean" DefaultValue="False" />
+    <Property Name="DocumentType" Type="String" DefaultValue="" />
+    <NavigationProperty Name="Dates" Relationship="EMR.WebAPI.ehr.models.ClaimLineDateClaimLine" FromRole="ClaimLine" ToRole="ClaimLineDate" />
+    <NavigationProperty Name="Reference" Relationship="EMR.WebAPI.ehr.models.ClaimLineRefClaimLine" FromRole="ClaimLine" ToRole="ClaimLineRef" />
+    <NavigationProperty Name="Drug" Relationship="EMR.WebAPI.ehr.models.ClaimLineDrugClaimLine" FromRole="ClaimLine" ToRole="ClaimLineDrug" />
+    <NavigationProperty Name="Attachment" Relationship="EMR.WebAPI.ehr.models.ClaimLineAttachmentClaimLine" FromRole="ClaimLine" ToRole="ClaimLineAttachment" />
+    <NavigationProperty Name="Durable" Relationship="EMR.WebAPI.ehr.models.ClaimLineDurableClaimLine" FromRole="ClaimLine" ToRole="ClaimLineDurable" />
+    <NavigationProperty Name="Contract" Relationship="EMR.WebAPI.ehr.models.ClaimLineContractClaimLine" FromRole="ClaimLine" ToRole="ClaimLineContract" />
+    <NavigationProperty Name="Dialysis" Relationship="EMR.WebAPI.ehr.models.ClaimLineDialysisClaimLine" FromRole="ClaimLine" ToRole="ClaimLineDialysis" />
+    <NavigationProperty Name="Pricing" Relationship="EMR.WebAPI.ehr.models.ClaimLinePricingClaimLine" FromRole="ClaimLine" ToRole="ClaimLinePricing" />
+    <NavigationProperty Name="Product" Relationship="EMR.WebAPI.ehr.models.ClaimLineProductClaimLine" FromRole="ClaimLine" ToRole="ClaimLineProduct" />
+    <NavigationProperty Name="Ambulance" Relationship="EMR.WebAPI.ehr.models.ClaimLineAmbulanceClaimLine" FromRole="ClaimLine" ToRole="ClaimLineAmbulance" />
+    <NavigationProperty Name="Supplemental" Relationship="EMR.WebAPI.ehr.models.ClaimLineSupplementalClaimLine" FromRole="ClaimLine" ToRole="ClaimLineSupplemental" />
+    <Property Name="ClaimId" Type="Int32" />
+    <NavigationProperty Name="DMERC" Relationship="EMR.WebAPI.ehr.models.ClaimLineClaimLineDMERC" FromRole="ClaimLine" ToRole="ClaimLineDMERC" />
+  </EntityType>
+  <EntityType Name="Claim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AcceptAssignment" DefaultValue="C" Type="String" />
+    <Property Name="AmountBalance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AmountCopay" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AmountTotal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FilingStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" DefaultValue="U" />
+    <Property Name="PrimaryPayerMemberID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecondaryPayerMemberID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DiagnosisCodes" Type="String" />
+    <Property Name="Relationship" Type="String" DefaultValue="18" />
+    <NavigationProperty Name="PlaceOfService" Relationship="EMR.WebAPI.ehr.models.PlaceOfServiceClaim" FromRole="Claim" ToRole="PlaceOfService" />
+    <Property Name="PlaceOfServiceId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="PrimarySubscriber" Relationship="EMR.WebAPI.ehr.models.SubscriberClaim" FromRole="Claim" ToRole="Subscriber" />
+    <Property Name="PrimarySubscriberId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="SecondarySubscriber" Relationship="EMR.WebAPI.ehr.models.SubscriberClaim1" FromRole="Claim" ToRole="Subscriber" />
+    <Property Name="SecondarySubscriberId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Patient" Relationship="EMR.WebAPI.ehr.models.PatientClaim" FromRole="Claim" ToRole="Patient" />
+    <Property Name="PatientId" Type="Int32" />
+    <NavigationProperty Name="Facility" Relationship="EMR.WebAPI.ehr.models.FacilityClaim" FromRole="Claim" ToRole="Facility" />
+    <Property Name="FacilityId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="PrimaryPayer" Relationship="EMR.WebAPI.ehr.models.PayerClaim" FromRole="Claim" ToRole="Payer" />
+    <Property Name="PrimaryPayerId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="SecondaryPayer" Relationship="EMR.WebAPI.ehr.models.PayerClaim1" FromRole="Claim" ToRole="Payer" />
+    <Property Name="SecondaryPayerId" Type="Int32" Nullable="true" />
+    <Property Name="EmploymentRelated" Type="Boolean" DefaultValue="False" />
+    <Property Name="OutsideLab" Type="Boolean" />
+    <Property Name="OutsideLabCharges" Type="Decimal" DefaultValue="0" Scale="2" />
+    <NavigationProperty Name="ClaimLines" Relationship="EMR.WebAPI.ehr.models.ClaimClaimLine" FromRole="Claim" ToRole="ClaimLine" />
+    <Property Name="Identifier" Type="String" annotation:StoreGeneratedPattern="None" />
+    <NavigationProperty Name="Dates" Relationship="EMR.WebAPI.ehr.models.ClaimDateClaim" FromRole="Claim" ToRole="ClaimDate" />
+    <Property Name="DateOfService" Type="DateTime" />
+    <Property Name="DateCreated" Type="DateTime" />
+    <Property Name="ProviderId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="RenderingProvider" Relationship="EMR.WebAPI.ehr.models.ProviderClaim1" FromRole="Claim" ToRole="Provider" />
+    <Property Name="RenderingProviderId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="BillingProvider" Relationship="EMR.WebAPI.ehr.models.ProviderClaim" FromRole="Claim" ToRole="Provider" />
+    <Property Name="BillingProviderId" Type="Int32" Nullable="true" />
+    <Property Name="AssignBenefits" Type="String" DefaultValue="N" />
+    <Property Name="AllowRelease" Type="String" DefaultValue="I" />
+    <Property Name="HasSignature" Type="Boolean" DefaultValue="False" />
+    <NavigationProperty Name="Accident" Relationship="EMR.WebAPI.ehr.models.ClaimAccidentClaim" FromRole="Claim" ToRole="ClaimAccident" />
+    <Property Name="SpecialProgram" Type="String" />
+    <Property Name="DelayReason" Type="String" />
+    <NavigationProperty Name="Supplemental" Relationship="EMR.WebAPI.ehr.models.ClaimSupplementalClaim" FromRole="Claim" ToRole="ClaimSupplemental" />
+    <NavigationProperty Name="Contract" Relationship="EMR.WebAPI.ehr.models.ClaimContractClaim" FromRole="Claim" ToRole="ClaimContract" />
+    <NavigationProperty Name="Reference" Relationship="EMR.WebAPI.ehr.models.ClaimReferenceClaim" FromRole="Claim" ToRole="ClaimReference" />
+    <Property Name="NoteType" Type="String" />
+    <Property Name="Notes" Type="String" />
+    <NavigationProperty Name="Ambulance" Relationship="EMR.WebAPI.ehr.models.ClaimAmbulanceClaim" FromRole="Claim" ToRole="ClaimAmbulance" />
+    <NavigationProperty Name="Spinal" Relationship="EMR.WebAPI.ehr.models.ClaimSpinalClaim" FromRole="Claim" ToRole="ClaimSpinal" />
+    <Property Name="HomeBound" Type="Boolean" DefaultValue="False" />
+    <NavigationProperty Name="Condition" Relationship="EMR.WebAPI.ehr.models.ClaimConditionClaim" FromRole="Claim" ToRole="ClaimCondition" />
+    <NavigationProperty Name="Repricing" Relationship="EMR.WebAPI.ehr.models.ClaimRepricingClaim" FromRole="Claim" ToRole="ClaimRepricing" />
+    <NavigationProperty Name="Amounts" Relationship="EMR.WebAPI.ehr.models.ClaimAmountClaim" FromRole="Claim" ToRole="ClaimAmount" />
+    <Property Name="SystemNoteKey" Type="String" />
+    <Property Name="ClaimPayerType" Type="String" ConcurrencyMode="None" DefaultValue="Other" />
+    <Property Name="DateModified" Type="DateTime" />
+    <NavigationProperty Name="Payment" Relationship="EMR.WebAPI.ehr.models.PaymentClaim" FromRole="Claim" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="CPTCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SystemNoteKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Extension" Type="String" />
+    <Property Name="NPI" Type="String" />
+    <Property Name="TaxId" Type="String" />
+    <Property Name="Address_1" Type="String" />
+    <Property Name="Address_2" Type="String" />
+    <Property Name="City" Type="String" />
+    <Property Name="State" Type="String" />
+    <Property Name="Zip" Type="String" />
+    <Property Name="PaytoAddress_1" Type="String" />
+    <Property Name="PaytoAddress_2" Type="String" />
+    <Property Name="PaytoCity" Type="String" />
+    <Property Name="PaytoState" Type="String" />
+    <Property Name="PaytoZip" Type="String" />
+    <Property Name="ContactName" Type="String" />
+    <Property Name="BillUnder" Type="String" DefaultValue="1" />
+  </EntityType>
+  <EntityType Name="ICDCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShortDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Payer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone_1" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="Phone_2" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PayerId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SystemNoteKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address_1" Type="String" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Address_2" Type="String" />
+    <Property Name="City" Type="String" />
+    <Property Name="State" Type="String" />
+    <Property Name="Zip" Type="String" />
+  </EntityType>
+  <EntityType Name="Modifier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SystemNoteKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeceased" Type="Boolean" DefaultValue="False" />
+    <Property Name="DateOfDeath" Type="DateTime" />
+    <Property Name="Weight" Type="Decimal" Scale="2" />
+    <Property Name="IsPregnant" Type="Boolean" DefaultValue="False" />
+    <Property Name="FirstName" Type="String" />
+    <Property Name="MiddleName" Type="String" />
+    <Property Name="LastName" Type="String" />
+    <Property Name="DateOfBirth" Type="DateTime" />
+    <Property Name="Gender" Type="String" DefaultValue="M" />
+    <Property Name="Phone" Type="String" />
+    <Property Name="Email" Type="String" />
+    <Property Name="Notes" Type="String" />
+    <Property Name="Suffix" Type="String" />
+    <Property Name="Address_1" Type="String" />
+    <Property Name="Address_2" Type="String" />
+    <Property Name="City" Type="String" />
+    <Property Name="State" Type="String" />
+    <Property Name="Zip" Type="String" />
+    <Property Name="Relationship" Type="String" DefaultValue="18" />
+    <Property Name="DateModified" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="Provider">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EIN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SSN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NPI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="License" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UPIN" Type="String" />
+    <Property Name="SystemNoteKey" Type="String" />
+    <NavigationProperty Name="TaxonomyCode" Relationship="EMR.WebAPI.ehr.models.TaxonomyCodeProvider" FromRole="Provider" ToRole="TaxonomyCode" />
+    <Property Name="TaxonomyCodeId" Type="Int32" />
+    <Property Name="FirstName" Type="String" />
+    <Property Name="MiddleName" Type="String" />
+    <Property Name="LastName" Type="String" />
+    <Property Name="Suffix" Type="String" />
+    <Property Name="Phone_1" Type="String" />
+    <Property Name="Email" Type="String" />
+    <Property Name="Fax" Type="String" />
+    <Property Name="Phone_2" Type="String" />
+    <NavigationProperty Name="Addresses" Relationship="EMR.WebAPI.ehr.models.AddressProvider" FromRole="Provider" ToRole="Address" />
+    <Property Name="Address_1" Type="String" />
+    <Property Name="Address_2" Type="String" />
+    <Property Name="City" Type="String" />
+    <Property Name="State" Type="String" />
+    <Property Name="Zip" Type="String" />
+    <Property Name="IsCompany" Type="Boolean" DefaultValue="False" Nullable="false" />
+    <Property Name="Credential" Type="String" DefaultValue="MD" />
+    <Property Name="DateModified" Type="DateTime" />
+    <NavigationProperty Name="Providers" Relationship="EMR.WebAPI.ehr.models.ProviderProvider" FromRole="Provider" ToRole="Provider1" />
+  </EntityType>
+  <EntityType Name="PlaceOfService">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SystemNoteKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TaxonomyCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" />
+    <Property Name="Grouping" Type="String" />
+    <Property Name="Classification" Type="String" />
+    <Property Name="Specialization" Type="String" />
+    <Property Name="Definition" Type="String" />
+    <Property Name="Notes" Type="String" />
+  </EntityType>
+  <EntityType Name="Subscriber">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SystemNoteKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PrimaryMemberID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecondaryMemberID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PrimaryExpiryDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecondaryExpiryDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PrimaryPayer" Relationship="EMR.WebAPI.ehr.models.PayerSubscriber" FromRole="Subscriber" ToRole="Payer" />
+    <Property Name="PrimaryPayerId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="SecondaryPayer" Relationship="EMR.WebAPI.ehr.models.PayerSubscriber1" FromRole="Subscriber" ToRole="Payer" />
+    <Property Name="SecondaryPayerId" Type="Int32" Nullable="true" />
+    <Property Name="FirstName" Type="String" />
+    <Property Name="MiddleName" Type="String" />
+    <Property Name="LastName" Type="String" />
+    <Property Name="DateOfBirth" Type="DateTime" />
+    <Property Name="Gender" Type="String" DefaultValue="M" />
+    <Property Name="Phone_1" Type="String" />
+    <Property Name="Phone_2" Type="String" />
+    <Property Name="Email" Type="String" />
+    <Property Name="Fax" Type="String" />
+    <Property Name="Notes" Type="String" />
+    <Property Name="Suffix" Type="String" />
+    <Property Name="Address_1" Type="String" />
+    <Property Name="Address_2" Type="String" />
+    <Property Name="City" Type="String" />
+    <Property Name="State" Type="String" />
+    <Property Name="Zip" Type="String" />
+    <NavigationProperty Name="Addresses" Relationship="EMR.WebAPI.ehr.models.AddressSubscriber" FromRole="Subscriber" ToRole="Address" />
+    <Property Name="GroupName" Type="String" />
+    <Property Name="GroupNumber" Type="String" />
+    <Property Name="PrimaryPayerType" Type="String" />
+    <Property Name="SecondaryPayerType" Type="String" />
+    <Property Name="IsDeceased" Type="Boolean" DefaultValue="False" />
+    <Property Name="DateOfDeath" Type="DateTime" />
+    <Property Name="Weight" Type="Decimal" Scale="2" />
+    <Property Name="IsPregnant" Type="Boolean" DefaultValue="False" />
+    <Property Name="SSN" Type="String" />
+    <Property Name="PrimaryInsurerId" Type="Int32" Nullable="true" />
+    <Property Name="SecondaryInsurerId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Patients" Relationship="EMR.WebAPI.ehr.models.PatientSubscriber" FromRole="Subscriber" ToRole="Patient" />
+    <Property Name="DateModified" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="SystemNote">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Key" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="OldValue" Type="String" />
+    <Property Name="NewValue" Type="String" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" DefaultValue="" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" DefaultValue="" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsInactive" Type="Boolean" Nullable="false" DefaultValue="False" />
+    <Property Name="SystemNoteKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Salt" Type="String" DefaultValue="" />
+    <NavigationProperty Name="Accounts" Relationship="EMR.WebAPI.ehr.models.UserAccount" FromRole="User" ToRole="Account" />
+    <Property Name="DefaultAccount" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="EHRDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="Self.Address" />
+    <EntitySet Name="ClaimLines" EntityType="Self.ClaimLine" />
+    <EntitySet Name="Claims" EntityType="Self.Claim" />
+    <EntitySet Name="CPTCodes" EntityType="Self.CPTCode" />
+    <EntitySet Name="Facilities" EntityType="Self.Facility" />
+    <EntitySet Name="ICDCodes" EntityType="Self.ICDCode" />
+    <EntitySet Name="Payers" EntityType="EMR.WebAPI.ehr.models.Payer" />
+    <EntitySet Name="Modifiers" EntityType="Self.Modifier" />
+    <EntitySet Name="Patients" EntityType="Self.Patient" />
+    <EntitySet Name="Providers" EntityType="EMR.WebAPI.ehr.models.Provider" />
+    <EntitySet Name="PlaceOfServices" EntityType="Self.PlaceOfService" />
+    <EntitySet Name="TaxonomyCodes" EntityType="EMR.WebAPI.ehr.models.TaxonomyCode" />
+    <EntitySet Name="Subscribers" EntityType="Self.Subscriber" />
+    <EntitySet Name="SystemNotes" EntityType="Self.SystemNote" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="ClaimDates" EntityType="EMR.WebAPI.ehr.models.ClaimDate" />
+    <EntitySet Name="ClaimLineDMERCs" EntityType="EMR.WebAPI.ehr.models.ClaimLineDMERC" />
+    <EntitySet Name="ClaimLineDates" EntityType="EMR.WebAPI.ehr.models.ClaimLineDate" />
+    <AssociationSet Name="ClaimLineDateClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLineDateClaimLine">
+      <End Role="ClaimLineDate" EntitySet="ClaimLineDates" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <EntitySet Name="ClaimLineReferences" EntityType="EMR.WebAPI.ehr.models.ClaimLineReference" />
+    <AssociationSet Name="ClaimLineRefClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLineRefClaimLine">
+      <End Role="ClaimLineRef" EntitySet="ClaimLineReferences" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <EntitySet Name="ClaimLineSupplementals" EntityType="EMR.WebAPI.ehr.models.ClaimLineSupplemental" />
+    <EntitySet Name="ClaimLineDrugs" EntityType="EMR.WebAPI.ehr.models.ClaimLineDrug" />
+    <AssociationSet Name="ClaimLineDrugClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLineDrugClaimLine">
+      <End Role="ClaimLineDrug" EntitySet="ClaimLineDrugs" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <EntitySet Name="ClaimLineAttachments" EntityType="EMR.WebAPI.ehr.models.ClaimLineAttachment" />
+    <AssociationSet Name="ClaimLineAttachmentClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLineAttachmentClaimLine">
+      <End Role="ClaimLineAttachment" EntitySet="ClaimLineAttachments" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <EntitySet Name="ClaimLineDurables" EntityType="EMR.WebAPI.ehr.models.ClaimLineDurable" />
+    <AssociationSet Name="ClaimLineDurableClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLineDurableClaimLine">
+      <End Role="ClaimLineDurable" EntitySet="ClaimLineDurables" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <EntitySet Name="ClaimLineAmbulances" EntityType="EMR.WebAPI.ehr.models.ClaimLineAmbulance" />
+    <EntitySet Name="ClaimLineContracts" EntityType="EMR.WebAPI.ehr.models.ClaimLineContract" />
+    <AssociationSet Name="ClaimLineContractClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLineContractClaimLine">
+      <End Role="ClaimLineContract" EntitySet="ClaimLineContracts" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <EntitySet Name="ClaimLineDialysis" EntityType="EMR.WebAPI.ehr.models.ClaimLineDialysis" />
+    <AssociationSet Name="ClaimLineDialysisClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLineDialysisClaimLine">
+      <End Role="ClaimLineDialysis" EntitySet="ClaimLineDialysis" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <EntitySet Name="ClaimLinePricings" EntityType="EMR.WebAPI.ehr.models.ClaimLinePricing" />
+    <AssociationSet Name="ClaimLinePricingClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLinePricingClaimLine">
+      <End Role="ClaimLinePricing" EntitySet="ClaimLinePricings" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <EntitySet Name="ClaimLineProducts" EntityType="EMR.WebAPI.ehr.models.ClaimLineProduct" />
+    <AssociationSet Name="ClaimLineProductClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLineProductClaimLine">
+      <End Role="ClaimLineProduct" EntitySet="ClaimLineProducts" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <AssociationSet Name="ClaimLineAmbulanceClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLineAmbulanceClaimLine">
+      <End Role="ClaimLineAmbulance" EntitySet="ClaimLineAmbulances" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <AssociationSet Name="ClaimLineSupplementalClaimLine" Association="EMR.WebAPI.ehr.models.ClaimLineSupplementalClaimLine">
+      <End Role="ClaimLineSupplemental" EntitySet="ClaimLineSupplementals" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <EntitySet Name="Submitters" EntityType="EMR.WebAPI.ehr.models.Submitter" />
+    <EntitySet Name="Receivers" EntityType="EMR.WebAPI.ehr.models.Receiver" />
+    <EntitySet Name="Batches" EntityType="EMR.WebAPI.ehr.models.Batch" />
+    <AssociationSet Name="PlaceOfServiceClaim" Association="EMR.WebAPI.ehr.models.PlaceOfServiceClaim">
+      <End Role="PlaceOfService" EntitySet="PlaceOfServices" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <AssociationSet Name="TaxonomyCodeProvider" Association="EMR.WebAPI.ehr.models.TaxonomyCodeProvider">
+      <End Role="TaxonomyCode" EntitySet="TaxonomyCodes" />
+      <End Role="Provider" EntitySet="Providers" />
+    </AssociationSet>
+    <AssociationSet Name="PayerSubscriber" Association="EMR.WebAPI.ehr.models.PayerSubscriber">
+      <End Role="Payer" EntitySet="Payers" />
+      <End Role="Subscriber" EntitySet="Subscribers" />
+    </AssociationSet>
+    <AssociationSet Name="PayerSubscriber1" Association="EMR.WebAPI.ehr.models.PayerSubscriber1">
+      <End Role="Payer" EntitySet="Payers" />
+      <End Role="Subscriber" EntitySet="Subscribers" />
+    </AssociationSet>
+    <AssociationSet Name="SubscriberClaim" Association="EMR.WebAPI.ehr.models.SubscriberClaim">
+      <End Role="Subscriber" EntitySet="Subscribers" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <AssociationSet Name="SubscriberClaim1" Association="EMR.WebAPI.ehr.models.SubscriberClaim1">
+      <End Role="Subscriber" EntitySet="Subscribers" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <AssociationSet Name="PatientClaim" Association="EMR.WebAPI.ehr.models.PatientClaim">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <AssociationSet Name="FacilityClaim" Association="EMR.WebAPI.ehr.models.FacilityClaim">
+      <End Role="Facility" EntitySet="Facilities" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <AssociationSet Name="PayerClaim" Association="EMR.WebAPI.ehr.models.PayerClaim">
+      <End Role="Payer" EntitySet="Payers" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <AssociationSet Name="PayerClaim1" Association="EMR.WebAPI.ehr.models.PayerClaim1">
+      <End Role="Payer" EntitySet="Payers" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <AssociationSet Name="ClaimClaimLine" Association="EMR.WebAPI.ehr.models.ClaimClaimLine">
+      <End Role="Claim" EntitySet="Claims" />
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+    </AssociationSet>
+    <AssociationSet Name="ClaimDateClaim" Association="EMR.WebAPI.ehr.models.ClaimDateClaim">
+      <End Role="ClaimDate" EntitySet="ClaimDates" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <AssociationSet Name="AddressProvider" Association="EMR.WebAPI.ehr.models.AddressProvider">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="Provider" EntitySet="Providers" />
+    </AssociationSet>
+    <AssociationSet Name="AddressSubscriber" Association="EMR.WebAPI.ehr.models.AddressSubscriber">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="Subscriber" EntitySet="Subscribers" />
+    </AssociationSet>
+    <AssociationSet Name="ClaimLineClaimLineDMERC" Association="EMR.WebAPI.ehr.models.ClaimLineClaimLineDMERC">
+      <End Role="ClaimLine" EntitySet="ClaimLines" />
+      <End Role="ClaimLineDMERC" EntitySet="ClaimLineDMERCs" />
+    </AssociationSet>
+    <AssociationSet Name="ProviderClaim1" Association="EMR.WebAPI.ehr.models.ProviderClaim1">
+      <End Role="Provider" EntitySet="Providers" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="PayToes" EntityType="EMR.WebAPI.ehr.models.PayTo" />
+    <AssociationSet Name="ProviderClaim" Association="EMR.WebAPI.ehr.models.ProviderClaim">
+      <End Role="Provider" EntitySet="Providers" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="ClaimAccidents" EntityType="EMR.WebAPI.ehr.models.ClaimAccident" />
+    <AssociationSet Name="ClaimAccidentClaim" Association="EMR.WebAPI.ehr.models.ClaimAccidentClaim">
+      <End Role="ClaimAccident" EntitySet="ClaimAccidents" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="ClaimSupplementals" EntityType="EMR.WebAPI.ehr.models.ClaimSupplemental" />
+    <AssociationSet Name="ClaimSupplementalClaim" Association="EMR.WebAPI.ehr.models.ClaimSupplementalClaim">
+      <End Role="ClaimSupplemental" EntitySet="ClaimSupplementals" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="ClaimContracts" EntityType="EMR.WebAPI.ehr.models.ClaimContract" />
+    <AssociationSet Name="ClaimContractClaim" Association="EMR.WebAPI.ehr.models.ClaimContractClaim">
+      <End Role="ClaimContract" EntitySet="ClaimContracts" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="ClaimReferences" EntityType="EMR.WebAPI.ehr.models.ClaimReference" />
+    <AssociationSet Name="ClaimReferenceClaim" Association="EMR.WebAPI.ehr.models.ClaimReferenceClaim">
+      <End Role="ClaimReference" EntitySet="ClaimReferences" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="ClaimAmbulances" EntityType="EMR.WebAPI.ehr.models.ClaimAmbulance" />
+    <AssociationSet Name="ClaimAmbulanceClaim" Association="EMR.WebAPI.ehr.models.ClaimAmbulanceClaim">
+      <End Role="ClaimAmbulance" EntitySet="ClaimAmbulances" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="ClaimSpinals" EntityType="EMR.WebAPI.ehr.models.ClaimSpinal" />
+    <AssociationSet Name="ClaimSpinalClaim" Association="EMR.WebAPI.ehr.models.ClaimSpinalClaim">
+      <End Role="ClaimSpinal" EntitySet="ClaimSpinals" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="ClaimConditions" EntityType="EMR.WebAPI.ehr.models.ClaimCondition" />
+    <AssociationSet Name="ClaimConditionClaim" Association="EMR.WebAPI.ehr.models.ClaimConditionClaim">
+      <End Role="ClaimCondition" EntitySet="ClaimConditions" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="ClaimRepricings" EntityType="EMR.WebAPI.ehr.models.ClaimRepricing" />
+    <AssociationSet Name="ClaimRepricingClaim" Association="EMR.WebAPI.ehr.models.ClaimRepricingClaim">
+      <End Role="ClaimRepricing" EntitySet="ClaimRepricings" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="ClaimAmounts" EntityType="EMR.WebAPI.ehr.models.ClaimAmount" />
+    <AssociationSet Name="ClaimAmountClaim" Association="EMR.WebAPI.ehr.models.ClaimAmountClaim">
+      <End Role="ClaimAmount" EntitySet="ClaimAmounts" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <EntitySet Name="Insurers" EntityType="EMR.WebAPI.ehr.models.Insurer" />
+    <AssociationSet Name="PatientSubscriber" Association="EMR.WebAPI.ehr.models.PatientSubscriber">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="Subscriber" EntitySet="Subscribers" />
+    </AssociationSet>
+    <AssociationSet Name="ProviderProvider" Association="EMR.WebAPI.ehr.models.ProviderProvider">
+      <End Role="Provider" EntitySet="Providers" />
+      <End Role="Provider1" EntitySet="Providers" />
+    </AssociationSet>
+    <EntitySet Name="UserRoles" EntityType="EMR.WebAPI.ehr.models.UserRole" />
+    <EntitySet Name="Accounts" EntityType="EMR.WebAPI.ehr.models.Account" />
+    <EntitySet Name="Payments" EntityType="EMR.WebAPI.ehr.models.Payment" />
+    <EntitySet Name="PaymentLines" EntityType="EMR.WebAPI.ehr.models.PaymentLine" />
+    <EntitySet Name="ErrorCodes" EntityType="EMR.WebAPI.ehr.models.ErrorCode" />
+    <EntitySet Name="ErrorMessages" EntityType="EMR.WebAPI.ehr.models.ErrorMessage" />
+    <AssociationSet Name="ErrorCodeErrorMessage" Association="EMR.WebAPI.ehr.models.ErrorCodeErrorMessage">
+      <End Role="ErrorCode" EntitySet="ErrorCodes" />
+      <End Role="ErrorMessage" EntitySet="ErrorMessages" />
+    </AssociationSet>
+    <AssociationSet Name="ErrorCodePayment" Association="EMR.WebAPI.ehr.models.ErrorCodePayment">
+      <End Role="ErrorCode" EntitySet="ErrorCodes" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="PaymentClaim" Association="EMR.WebAPI.ehr.models.PaymentClaim">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="Claim" EntitySet="Claims" />
+    </AssociationSet>
+    <AssociationSet Name="PaymentPaymentLine" Association="EMR.WebAPI.ehr.models.PaymentPaymentLine">
+      <End Role="Payment" EntitySet="Payments" />
+      <End Role="PaymentLine" EntitySet="PaymentLines" />
+    </AssociationSet>
+    <AssociationSet Name="UserAccount" Association="EMR.WebAPI.ehr.models.UserAccount">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <EntitySet Name="UserPreferences" EntityType="EMR.WebAPI.ehr.models.UserPreference" />
+  </EntityContainer>
+  <EntityType Name="ClaimDate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OnsetOfCurrent" Type="DateTime" />
+    <Property Name="InitialTreatment" Type="DateTime" />
+    <Property Name="LastSeen" Type="DateTime" />
+    <Property Name="Acute" Type="DateTime" />
+    <Property Name="LastMenstrual" Type="DateTime" />
+    <Property Name="LastXRay" Type="DateTime" />
+    <Property Name="HearingVision" Type="DateTime" />
+    <Property Name="LastWorked" Type="DateTime" />
+    <Property Name="ReturnToWork" Type="DateTime" />
+    <Property Name="Admission" Type="DateTime" />
+    <Property Name="Discharge" Type="DateTime" />
+    <Property Name="Assumed" Type="DateTime" />
+    <Property Name="Property" Type="DateTime" />
+    <Property Name="Repricer" Type="DateTime" />
+    <Property Name="SystemNoteKey" Type="String" />
+    <Property Name="Other" Type="DateTime" />
+    <Property Name="DisabilityStart" Type="DateTime" />
+    <Property Name="DisabilityEnd" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="ClaimLineDMERC">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DMERC_Response" Type="String" DefaultValue="N" />
+    <Property Name="DMERC_Code" Type="String" />
+    <Property Name="DMERC_Code2" Type="String" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <EntityType Name="ClaimLineDate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLineDateClaimLine" FromRole="ClaimLineDate" ToRole="ClaimLine" />
+    <Property Name="Prescription" Type="DateTime" />
+    <Property Name="Certification" Type="DateTime" />
+    <Property Name="BeginTherapy" Type="DateTime" />
+    <Property Name="LastCertification" Type="DateTime" />
+    <Property Name="LastSeen" Type="DateTime" />
+    <Property Name="Test" Type="DateTime" />
+    <Property Name="Shipped" Type="DateTime" />
+    <Property Name="LastXRay" Type="DateTime" />
+    <Property Name="InitialTreatment" Type="DateTime" />
+    <Property Name="SystemNoteKey" Type="String" />
+    <Property Name="ServiceFrom" Type="DateTime" />
+    <Property Name="ServiceTo" Type="DateTime" />
+  </EntityType>
+  <Association Name="ClaimLineDateClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineDate" Role="ClaimLineDate" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <EntityType Name="ClaimLineReference">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLineRefClaimLine" FromRole="ClaimLineRef" ToRole="ClaimLine" />
+    <Property Name="Repriced" Type="String" />
+    <Property Name="AdjustedRepriced" Type="String" />
+    <Property Name="Prior" Type="String" />
+    <Property Name="PriorIdentifier" Type="String" />
+    <Property Name="PriorOtherPayer" Type="String" />
+    <Property Name="ControlNumber" Type="String" />
+    <Property Name="Mammography" Type="String" />
+    <Property Name="CLIA" Type="String" />
+    <Property Name="CLIAFacility" Type="String" />
+    <Property Name="Immunization" Type="String" />
+    <Property Name="Referral" Type="String" />
+    <Property Name="ReferralIdentifier" Type="String" />
+    <Property Name="ReferralOtherPayer" Type="String" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="ClaimLineRefClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineReference" Role="ClaimLineRef" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <EntityType Name="ClaimLineSupplemental">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SalesTaxAmount" Type="Decimal" DefaultValue="0" Scale="2" />
+    <Property Name="PostageAmount" Type="Decimal" DefaultValue="0" Scale="2" />
+    <Property Name="FileInfo" Type="String" />
+    <Property Name="NoteCode" Type="String" />
+    <Property Name="NoteDescription" Type="String" />
+    <Property Name="ThirdPartyCode" Type="String" />
+    <Property Name="ThirdPartyDescription" Type="String" />
+    <Property Name="PurchaseCode" Type="String" />
+    <Property Name="PurchaseAmount" Type="Decimal" DefaultValue="0" />
+    <Property Name="RejectCode" Type="String" />
+    <Property Name="ComplianceCode" Type="String" />
+    <Property Name="ExceptionCode" Type="String" />
+    <Property Name="HospiceCode" Type="String" />
+    <Property Name="ObsAnesUnits" Type="Int32" DefaultValue="0" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLineSupplementalClaimLine" FromRole="ClaimLineSupplemental" ToRole="ClaimLine" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <EntityType Name="ClaimLineDrug">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLineDrugClaimLine" FromRole="ClaimLineDrug" ToRole="ClaimLine" />
+    <Property Name="Qualifier" Type="String" />
+    <Property Name="Code" Type="String" />
+    <Property Name="Quantity" Type="Int32" DefaultValue="0" />
+    <Property Name="Unit" Type="String" />
+    <Property Name="PrescriptionCode" Type="String" />
+    <Property Name="PrescriptionNumber" Type="String" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="ClaimLineDrugClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineDrug" Role="ClaimLineDrug" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <EntityType Name="ClaimLineAttachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLineAttachmentClaimLine" FromRole="ClaimLineAttachment" ToRole="ClaimLine" />
+    <Property Name="Type" Type="String" />
+    <Property Name="Transmission" Type="String" />
+    <Property Name="Code" Type="String" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="ClaimLineAttachmentClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineAttachment" Role="ClaimLineAttachment" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <EntityType Name="ClaimLineDurable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLineDurableClaimLine" FromRole="ClaimLineDurable" ToRole="ClaimLine" />
+    <Property Name="Transmission" Type="String" />
+    <Property Name="Procedure" Type="String" />
+    <Property Name="Quantity" Type="String" />
+    <Property Name="Rental" Type="Decimal" />
+    <Property Name="Purchase" Type="Decimal" />
+    <Property Name="Frequency" Type="String" />
+    <Property Name="CertCode" Type="String" />
+    <Property Name="CertQuantity" Type="Decimal" DefaultValue="0" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="ClaimLineDurableClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineDurable" Role="ClaimLineDurable" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <EntityType Name="ClaimLineAmbulance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Weight" Type="Decimal" DefaultValue="0" />
+    <Property Name="Reason" Type="String" />
+    <Property Name="Quantity" Type="Decimal" />
+    <Property Name="RoundTrip" Type="String" />
+    <Property Name="Stretcher" Type="String" />
+    <Property Name="CertCode_1" Type="String" />
+    <Property Name="CertCode_2" Type="String" />
+    <Property Name="CertCode_3" Type="String" />
+    <Property Name="CertCode_4" Type="String" />
+    <Property Name="CertCode_5" Type="String" />
+    <Property Name="CertResponse" Type="String" />
+    <Property Name="PatientCount" Type="Int32" DefaultValue="0" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLineAmbulanceClaimLine" FromRole="ClaimLineAmbulance" ToRole="ClaimLine" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <EntityType Name="ClaimLineContract">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLineContractClaimLine" FromRole="ClaimLineContract" ToRole="ClaimLine" />
+    <Property Name="Type" Type="String" />
+    <Property Name="Amount" Type="Decimal" DefaultValue="0" Scale="2" />
+    <Property Name="Percent" Type="Decimal" DefaultValue="0" />
+    <Property Name="Code" Type="String" />
+    <Property Name="Discount" Type="Decimal" DefaultValue="0" />
+    <Property Name="Version" Type="String" Nullable="false" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="ClaimLineContractClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineContract" Role="ClaimLineContract" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <EntityType Name="ClaimLineDialysis">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLineDialysisClaimLine" FromRole="ClaimLineDialysis" ToRole="ClaimLine" />
+    <Property Name="Code" Type="String" />
+    <Property Name="Qualifier" Type="String" />
+    <Property Name="Value" Type="String" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="ClaimLineDialysisClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineDialysis" Role="ClaimLineDialysis" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <EntityType Name="ClaimLinePricing">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLinePricingClaimLine" FromRole="ClaimLinePricing" ToRole="ClaimLine" />
+    <Property Name="Method" Type="String" />
+    <Property Name="AmountAllowed" Type="Decimal" Scale="2" />
+    <Property Name="AmountSavings" Type="Decimal" Scale="2" />
+    <Property Name="OrgID" Type="String" />
+    <Property Name="Rate" Type="Decimal" Scale="2" />
+    <Property Name="AmbGroup" Type="String" />
+    <Property Name="AmbGroupAmount" Type="Decimal" DefaultValue="0" Scale="2" />
+    <Property Name="ProductQualifier" Type="String" />
+    <Property Name="HCPCS" Type="String" />
+    <Property Name="Unit" Type="String" />
+    <Property Name="Quantity" Type="Decimal" />
+    <Property Name="ComplianceCode" Type="String" />
+    <Property Name="ExceptionCode" Type="String" />
+    <Property Name="RejectReason" Type="String" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="ClaimLinePricingClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLinePricing" Role="ClaimLinePricing" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <EntityType Name="ClaimLineProduct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Qualifier" Type="String" />
+    <Property Name="Code" Type="String" />
+    <Property Name="Unit" Type="String" />
+    <Property Name="Quantity" Type="Decimal" />
+    <NavigationProperty Name="ClaimLine" Relationship="EMR.WebAPI.ehr.models.ClaimLineProductClaimLine" FromRole="ClaimLineProduct" ToRole="ClaimLine" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="ClaimLineProductClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineProduct" Role="ClaimLineProduct" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <Association Name="ClaimLineAmbulanceClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineAmbulance" Role="ClaimLineAmbulance" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <Association Name="ClaimLineSupplementalClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineSupplemental" Role="ClaimLineSupplemental" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+  </Association>
+  <EntityType Name="Submitter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastName" Type="String" DefaultValue="''" />
+    <Property Name="FirstName" Type="String" DefaultValue="''" />
+    <Property Name="MiddleName" Type="String" DefaultValue="''" />
+    <Property Name="OrgName" Type="String" DefaultValue="''" />
+    <Property Name="Identifier" Type="String" DefaultValue="''" />
+    <Property Name="Phone" Type="String" DefaultValue="''" />
+    <Property Name="Email" Type="String" DefaultValue="''" />
+    <Property Name="Fax" Type="String" DefaultValue="''" />
+    <Property Name="ContactName" Type="String" DefaultValue="''" />
+  </EntityType>
+  <EntityType Name="Receiver">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" DefaultValue="''" />
+    <Property Name="Identifier" Type="String" DefaultValue="''" />
+    <Property Name="Active" Type="Boolean" DefaultValue="True" />
+  </EntityType>
+  <EntityType Name="Batch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateCreated" Type="DateTime" />
+    <Property Name="Identifier" Type="String" DefaultValue="" />
+    <Property Name="ClaimIDs" Type="String" />
+    <Property Name="CreatedById" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" DefaultValue="U" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="PlaceOfServiceClaim">
+    <End Type="EMR.WebAPI.ehr.models.PlaceOfService" Role="PlaceOfService" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlaceOfService">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Claim">
+        <PropertyRef Name="PlaceOfServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TaxonomyCodeProvider">
+    <End Type="EMR.WebAPI.ehr.models.TaxonomyCode" Role="TaxonomyCode" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Provider" Role="Provider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaxonomyCode">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Provider">
+        <PropertyRef Name="TaxonomyCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PayerSubscriber">
+    <End Type="EMR.WebAPI.ehr.models.Payer" Role="Payer" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Subscriber" Role="Subscriber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subscriber">
+        <PropertyRef Name="PrimaryPayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PayerSubscriber1">
+    <End Type="EMR.WebAPI.ehr.models.Payer" Role="Payer" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Subscriber" Role="Subscriber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subscriber">
+        <PropertyRef Name="SecondaryPayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubscriberClaim">
+    <End Type="EMR.WebAPI.ehr.models.Subscriber" Role="Subscriber" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subscriber">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Claim">
+        <PropertyRef Name="PrimarySubscriberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubscriberClaim1">
+    <End Type="EMR.WebAPI.ehr.models.Subscriber" Role="Subscriber" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subscriber">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Claim">
+        <PropertyRef Name="SecondarySubscriberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientClaim">
+    <End Type="EMR.WebAPI.ehr.models.Patient" Role="Patient" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Claim">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FacilityClaim">
+    <End Type="EMR.WebAPI.ehr.models.Facility" Role="Facility" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Claim">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PayerClaim">
+    <End Type="EMR.WebAPI.ehr.models.Payer" Role="Payer" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Claim">
+        <PropertyRef Name="PrimaryPayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PayerClaim1">
+    <End Type="EMR.WebAPI.ehr.models.Payer" Role="Payer" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Claim">
+        <PropertyRef Name="SecondaryPayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClaimClaimLine">
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Claim">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClaimLine">
+        <PropertyRef Name="ClaimId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClaimDateClaim">
+    <End Type="EMR.WebAPI.ehr.models.ClaimDate" Role="ClaimDate" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <Association Name="AddressProvider">
+    <End Type="EMR.WebAPI.ehr.models.Address" Role="Address" Multiplicity="*" />
+    <End Type="EMR.WebAPI.ehr.models.Provider" Role="Provider" Multiplicity="*" />
+  </Association>
+  <Association Name="AddressSubscriber">
+    <End Type="EMR.WebAPI.ehr.models.Address" Role="Address" Multiplicity="*" />
+    <End Type="EMR.WebAPI.ehr.models.Subscriber" Role="Subscriber" Multiplicity="*" />
+  </Association>
+  <Association Name="ClaimLineClaimLineDMERC">
+    <End Type="EMR.WebAPI.ehr.models.ClaimLine" Role="ClaimLine" Multiplicity="1" />
+    <End Type="EMR.WebAPI.ehr.models.ClaimLineDMERC" Role="ClaimLineDMERC" Multiplicity="0..1" />
+  </Association>
+  <Association Name="ProviderClaim1">
+    <End Type="EMR.WebAPI.ehr.models.Provider" Role="Provider" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Claim">
+        <PropertyRef Name="RenderingProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PayTo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Address_1" Type="String" />
+    <Property Name="Address_2" Type="String" />
+    <Property Name="City" Type="String" />
+    <Property Name="State" Type="String" />
+    <Property Name="Zip" Type="String" />
+    <Property Name="Name" Type="String" />
+    <Property Name="BillingProviderId" Type="Int32" />
+    <Property Name="RenderingProviderId" Type="Int32" />
+    <Property Name="IsCompany" Type="Boolean" Nullable="false" DefaultValue="False" />
+  </EntityType>
+  <Association Name="ProviderClaim">
+    <End Type="EMR.WebAPI.ehr.models.Provider" Role="Provider" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Claim">
+        <PropertyRef Name="BillingProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ClaimAccident">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Causes" Type="String" />
+    <Property Name="State" Type="String" />
+    <Property Name="Country" Type="String" />
+    <Property Name="Date" Type="DateTime" />
+  </EntityType>
+  <Association Name="ClaimAccidentClaim">
+    <End Type="EMR.WebAPI.ehr.models.ClaimAccident" Role="ClaimAccident" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="ClaimSupplemental">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttachmentType" Type="String" />
+    <Property Name="TransmissionType" Type="String" />
+    <Property Name="AttachmentNumber" Type="String" />
+  </EntityType>
+  <Association Name="ClaimSupplementalClaim">
+    <End Type="EMR.WebAPI.ehr.models.ClaimSupplemental" Role="ClaimSupplemental" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="ClaimContract">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" />
+    <Property Name="Amount" Type="Decimal" DefaultValue="0" Scale="2" />
+    <Property Name="Percent" Type="Decimal" />
+    <Property Name="Code" Type="String" />
+    <Property Name="Discount" Type="String" />
+    <Property Name="Version" Type="String" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="ClaimContractClaim">
+    <End Type="EMR.WebAPI.ehr.models.ClaimContract" Role="ClaimContract" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="ClaimReference">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuthorizationException" Type="String" />
+    <Property Name="MandatoryMedicare" Type="String" />
+    <Property Name="Mammography" Type="String" />
+    <Property Name="Referral" Type="String" />
+    <Property Name="Prior" Type="String" />
+    <Property Name="ClaimControl" Type="String" />
+    <Property Name="Repriced" Type="String" />
+    <Property Name="AdjustedRepriced" Type="String" />
+    <Property Name="InvestigationalDevice" Type="String" />
+    <Property Name="Transmission" Type="String" />
+    <Property Name="MedicalRecord" Type="String" />
+    <Property Name="Demonstration" Type="String" />
+    <Property Name="CarePlanOversight" Type="String" />
+    <Property Name="CLIA" Type="String" />
+  </EntityType>
+  <Association Name="ClaimReferenceClaim">
+    <End Type="EMR.WebAPI.ehr.models.ClaimReference" Role="ClaimReference" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="ClaimAmbulance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Weight" Type="Decimal" DefaultValue="0" Scale="2" />
+    <Property Name="Reason" Type="String" />
+    <Property Name="Quantity" Type="Decimal" />
+    <Property Name="RoundTrip" Type="String" />
+    <Property Name="Stretcher" Type="String" />
+    <Property Name="CertCode_1" Type="String" />
+    <Property Name="CertCode_2" Type="String" />
+    <Property Name="CertCode_3" Type="String" />
+    <Property Name="CertCode_4" Type="String" />
+    <Property Name="CertCode_5" Type="String" />
+    <Property Name="CertResponse" Type="String" />
+    <Property Name="PatientCount" Type="Int32" DefaultValue="0" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <Association Name="ClaimAmbulanceClaim">
+    <End Type="EMR.WebAPI.ehr.models.ClaimAmbulance" Role="ClaimAmbulance" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="ClaimSpinal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" />
+    <Property Name="Description_1" Type="String" />
+    <Property Name="Description_2" Type="String" />
+  </EntityType>
+  <Association Name="ClaimSpinalClaim">
+    <End Type="EMR.WebAPI.ehr.models.ClaimSpinal" Role="ClaimSpinal" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="ClaimCondition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EPSDT" Type="String" />
+    <Property Name="Anesthesia" Type="String" />
+    <Property Name="Conditions" Type="String" />
+    <Property Name="Vision" Type="String" />
+  </EntityType>
+  <Association Name="ClaimConditionClaim">
+    <End Type="EMR.WebAPI.ehr.models.ClaimCondition" Role="ClaimCondition" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="ClaimRepricing">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Methodology" Type="String" />
+    <Property Name="AllowedAmount" Type="Decimal" DefaultValue="0" Scale="2" />
+    <Property Name="SavingAmount" Type="Decimal" DefaultValue="0" Scale="2" />
+    <Property Name="OrgIdentifier" Type="String" />
+    <Property Name="Rate" Type="Decimal" Scale="2" />
+    <Property Name="AmbulatoryGroup" Type="String" />
+    <Property Name="AmbulatoryAmount" Type="Decimal" DefaultValue="0" Scale="2" />
+    <Property Name="RejectReason" Type="String" />
+    <Property Name="PolicyCompliance" Type="String" />
+    <Property Name="Exception" Type="String" />
+  </EntityType>
+  <Association Name="ClaimRepricingClaim">
+    <End Type="EMR.WebAPI.ehr.models.ClaimRepricing" Role="ClaimRepricing" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="ClaimAmount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PayerPaid" Type="Decimal" Scale="2" />
+    <Property Name="NonCovered" Type="Decimal" Scale="2" />
+    <Property Name="PatientLiability" Type="Decimal" Scale="2" />
+  </EntityType>
+  <Association Name="ClaimAmountClaim">
+    <End Type="EMR.WebAPI.ehr.models.ClaimAmount" Role="ClaimAmount" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="Insurer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SystemNoteKey" Type="String" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" />
+    <Property Name="LastName" Type="String" Nullable="false" />
+    <Property Name="Address_1" Type="String" Nullable="false" />
+    <Property Name="Address_2" Type="String" Nullable="false" />
+    <Property Name="City" Type="String" Nullable="false" />
+    <Property Name="State" Type="String" Nullable="false" />
+    <Property Name="Zip" Type="String" Nullable="false" />
+    <Property Name="Phone_1" Type="String" Nullable="false" />
+    <Property Name="Phone_2" Type="String" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="PatientSubscriber">
+    <End Type="EMR.WebAPI.ehr.models.Patient" Role="Patient" Multiplicity="*" />
+    <End Type="EMR.WebAPI.ehr.models.Subscriber" Role="Subscriber" Multiplicity="*" />
+  </Association>
+  <Association Name="ProviderProvider">
+    <End Type="EMR.WebAPI.ehr.models.Provider" Role="Provider" Multiplicity="*" />
+    <End Type="EMR.WebAPI.ehr.models.Provider" Role="Provider1" Multiplicity="*" />
+  </Association>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Inactive" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+    <Property Name="IsInactive" Type="Boolean" Nullable="false" DefaultValue="False" />
+    <Property Name="SystemNoteKey" Type="String" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SystemNoteKey" Type="String" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+    <Property Name="Notes" Type="String" />
+    <NavigationProperty Name="ErrorCode" Relationship="EMR.WebAPI.ehr.models.ErrorCodePayment" FromRole="Payment" ToRole="ErrorCode" />
+    <Property Name="AmountTotal" Type="Decimal" Nullable="false" DefaultValue="0" />
+    <Property Name="AmountPayment" Type="Decimal" Nullable="false" DefaultValue="0" />
+    <Property Name="AmountCopay" Type="Decimal" Nullable="false" />
+    <Property Name="AmountDeductible" Type="Decimal" Nullable="false" DefaultValue="0" />
+    <Property Name="AmountBalance" Type="Decimal" Nullable="false" />
+    <NavigationProperty Name="PaymentLines" Relationship="EMR.WebAPI.ehr.models.PaymentPaymentLine" FromRole="Payment" ToRole="PaymentLine" />
+  </EntityType>
+  <EntityType Name="PaymentLine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SystemNoteKey" Type="String" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+    <Property Name="ClaimLineId" Type="Int32" />
+    <Property Name="AmountPayment" Type="Decimal" DefaultValue="0" />
+    <Property Name="AmountCopay" Type="Decimal" />
+    <Property Name="AmountDeductible" Type="Decimal" DefaultValue="0" />
+    <Property Name="PaymentId" Type="Int32" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ErrorCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" />
+    <Property Name="ARTo" Type="String" />
+    <Property Name="EditBatch" Type="String" />
+    <Property Name="ToPayer" Type="String" />
+    <Property Name="ToPatient" Type="String" />
+    <NavigationProperty Name="ErrorMessages" Relationship="EMR.WebAPI.ehr.models.ErrorCodeErrorMessage" FromRole="ErrorCode" ToRole="ErrorMessage" />
+  </EntityType>
+  <EntityType Name="ErrorMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="ErrorCodeErrorMessage">
+    <End Type="EMR.WebAPI.ehr.models.ErrorCode" Role="ErrorCode" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.ErrorMessage" Role="ErrorMessage" Multiplicity="*" />
+  </Association>
+  <Association Name="ErrorCodePayment">
+    <End Type="EMR.WebAPI.ehr.models.ErrorCode" Role="ErrorCode" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Payment" Role="Payment" Multiplicity="0..1" />
+  </Association>
+  <Association Name="PaymentClaim">
+    <End Type="EMR.WebAPI.ehr.models.Payment" Role="Payment" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.Claim" Role="Claim" Multiplicity="0..1" />
+  </Association>
+  <Association Name="PaymentPaymentLine">
+    <End Type="EMR.WebAPI.ehr.models.Payment" Role="Payment" Multiplicity="0..1" />
+    <End Type="EMR.WebAPI.ehr.models.PaymentLine" Role="PaymentLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PaymentLine">
+        <PropertyRef Name="PaymentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserAccount">
+    <End Type="EMR.WebAPI.ehr.models.User" Role="User" Multiplicity="*" />
+    <End Type="EMR.WebAPI.ehr.models.Account" Role="Account" Multiplicity="*" />
+  </Association>
+  <EntityType Name="UserPreference">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" DefaultValue="-1" />
+    <Property Name="AccountId" Type="Int32" DefaultValue="-1" />
+    <Property Name="SystemNoteKey" Type="String" />
+    <Property Name="RenderingProviderId" Type="Int32" />
+    <Property Name="BillingProviderId" Type="Int32" />
+    <Property Name="FacilityId" Type="Int32" />
+    <Property Name="PlaceOfServiceId" Type="Int32" />
+  </EntityType>
+</Schema>
