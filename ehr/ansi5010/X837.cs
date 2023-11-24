@@ -1,9 +1,8 @@
-﻿using System;
+﻿using EMR.WebAPI.ehr.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web;
-using EMR.WebAPI.ehr.models;
 
 namespace EMR.WebAPI.ehr.ansi5010
 {
@@ -78,7 +77,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         public string Receiver { get; set; }
 
         public string Database { get; set; }
-        
+
         public string InterchangeControlNumber { get; set; }
 
         public string GroupControlNumber { get; set; }
@@ -120,6 +119,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg.Items["ISA14"] = CONFIG["ISA14"];
                 seg.Items["ISA15"] = CONFIG["ISA15"];
                 seg.Items["ISA16"] = CONFIG["ISA16"];
+                seg.FormatVals();
                 return seg;
             }
         }
@@ -131,6 +131,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 Segment seg = new Segment("IEA");
                 seg["IEA01"] = "1";
                 seg["IEA02"] = InterchangeControlNumber;
+                seg.FormatVals();
                 return seg;
             }
         }
@@ -159,6 +160,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg.Items["GS06"] = GroupControlNumber;
                 seg.Items["GS07"] = CONFIG["GS07"];
                 seg.Items["GS08"] = CONFIG["GS08"];
+                seg.FormatVals();
                 return seg;
             }
         }
@@ -170,6 +172,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 Segment seg = new Segment("GE");
                 seg["GE01"] = "1"; // Nunmber of Transaction Sets Included
                 seg["GE02"] = GroupControlNumber;
+                seg.FormatVals();
                 return seg;
             }
         }
@@ -183,6 +186,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg.Items["ST01"] = "837";
                 seg.Items["ST02"] = controlST;
                 seg.Items["ST03"] = CONFIG["GS08"];
+                seg.FormatVals();
                 return seg;
             }
         }
@@ -193,7 +197,8 @@ namespace EMR.WebAPI.ehr.ansi5010
             {
                 Segment seg = new Segment("SE");
                 seg.Items["SE01"] = segmentCount.ToString();
-                seg.Items["ST02"] = controlST;
+                seg.Items["SE02"] = controlST;
+                seg.FormatVals();
                 return seg;
             }
         }
@@ -210,6 +215,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg.Items["BHT04"] = X837Writer.WriteDate(controlDT);
                 seg.Items["BHT05"] = X837Writer.WriteTime(controlDT);
                 seg.Items["BHT06"] = CONFIG["BHT06"];
+                seg.FormatVals();
                 return seg;
             }
         }
@@ -236,7 +242,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             controlST = (1).ToString().PadLeft(4, '0');
             controlDT = DateTime.Now;
         }
-        
+
         // NOT USED
         private void InitClaims()
         {
@@ -288,15 +294,15 @@ namespace EMR.WebAPI.ehr.ansi5010
             List<Claim> billedUnderGroup = Claims
                                             .Where(x => x.BillingProvider.Id != x.RenderingProvider.Id)
                                             .ToList();
-            
-             List<Provider> billingGroups = billedUnderGroup.Select(x => x.BillingProvider)
-                                            .Distinct().ToList();
 
-            foreach(Provider billingGroup in billingGroups)
+            List<Provider> billingGroups = billedUnderGroup.Select(x => x.BillingProvider)
+                                           .Distinct().ToList();
+
+            foreach (Provider billingGroup in billingGroups)
             {
                 List<Provider> groupRenderingProviders = billedUnderGroup.Select(x => x.RenderingProvider)
                                                             .Distinct().ToList();
-                foreach(Provider renderingProvider in groupRenderingProviders)
+                foreach (Provider renderingProvider in groupRenderingProviders)
                 {
                     sb.Append(WriteBiller(billedUnderGroup, billingGroup, renderingProvider));
                 }
@@ -310,7 +316,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             List<Provider> billingProviders = billedAsIndividual.Select(x => x.RenderingProvider)
                                                 .Distinct().ToList();
 
-            foreach(Provider billingProvider in billingProviders)
+            foreach (Provider billingProvider in billingProviders)
             {
                 sb.Append(WriteBiller(billedAsIndividual, billingProvider));
             }
@@ -370,6 +376,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             #region Billing Provider Hierarchy Level
             Segment seg = Segment.HL(hl, "20");
             seg["HL04"] = "1";
+            seg.FormatVals();
             AppendToString(sb, seg.Output);
             #endregion
 
@@ -564,6 +571,7 @@ namespace EMR.WebAPI.ehr.ansi5010
 
             seg = Segment.HL(hl, "22", hlprov);
             seg["HL04"] = dependentClaims.Count > 0 ? "1" : "0";
+            seg.FormatVals();
             AppendToString(sb, seg.Output);
             #endregion
 
@@ -572,7 +580,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             {
                 sb.Append(WriteSubscriber(subscriber));
 
-                foreach(Claim selfClaim in selfClaims)
+                foreach (Claim selfClaim in selfClaims)
                 {
                     sb.Append(WriteClaimLoop(selfClaim));
                 }
@@ -585,7 +593,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 // Write subscriber when Subscriber != Patient
                 sb.Append(WriteSubscriber(subscriber, false));
 
-                foreach(Claim dependentClaim in dependentClaims)
+                foreach (Claim dependentClaim in dependentClaims)
                 {
                     sb.Append(WriteClaimLoop(dependentClaim));
                 }
@@ -611,6 +619,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["SBR04"] = subscriber.GroupName;
             seg["SBR05"] = subscriber.PrimaryPayerType;
             seg["SBR09"] = "CI";
+            seg.FormatVals();
             AppendToString(sb, seg.Output);
             #endregion
 
@@ -650,6 +659,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     {
                         seg["PAT09"] = "Y";
                     }
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
             }
@@ -722,7 +732,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             #endregion
 
             #region Patient Name, Address
-            seg = Segment.NM1("QC", "1", 
+            seg = Segment.NM1("QC", "1",
                 patient.LastName, patient.FirstName, patient.MiddleName, patient.Suffix, "", "");
             AppendToString(sb, seg.Output);
 
@@ -775,6 +785,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg["CLM11"] = acc;
                 }
             }
+            seg.FormatVals();
             AppendToString(sb, seg.Output);
             #endregion
 
@@ -814,6 +825,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg["PWK07"] = claim.Supplemental.AttachmentNumber;
                 }
 
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
             }
             #endregion
@@ -867,6 +879,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["CR106"] = amb.Quantity.Value.ToString();
                 seg["CR109"] = String.IsNullOrEmpty(amb.RoundTrip) == false ? amb.RoundTrip : "";
                 seg["CR110"] = String.IsNullOrEmpty(amb.Stretcher) == false ? amb.Stretcher : "";
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
 
                 seg = Segment.CRC();
@@ -877,6 +890,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["CRC05"] = amb.CertCode_3;
                 seg["CRC06"] = amb.CertCode_4;
                 seg["CRC07"] = amb.CertCode_5;
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
             }
             #endregion
@@ -889,6 +903,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["CR208"] = spin.Code;
                 seg["CR210"] = String.IsNullOrEmpty(spin.Description_1) == false ? spin.Description_1 : "";
                 seg["CR211"] = String.IsNullOrEmpty(spin.Description_2) == false ? spin.Description_2 : "";
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
             }
             #endregion
@@ -900,6 +915,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["CRC01"] = "75";
                 seg["CRC01"] = "Y";
                 seg["CRC01"] = "IH";
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
             }
             #endregion
@@ -915,6 +931,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg["HI" + i.ToString().PadLeft(2, '0')] =
                         (i == 0 ? "ABK" : "ABF") + ":" + diags[i];
                 }
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
             }
             #endregion
@@ -934,10 +951,11 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg["CRC02"] = parts[1];
 
                     subparts = parts[2].Split(new[] { ',' }).ToList();
-                    for (int i=0, n=subparts.Count; i<n; i++)
+                    for (int i = 0, n = subparts.Count; i < n; i++)
                     {
                         seg["CRC" + (i + 3).ToString().PadLeft(2, '0')] = subparts[i];
                     }
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -956,6 +974,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     {
                         seg["CRC" + (i + 3).ToString().PadLeft(2, '0')] = subparts[i];
                     }
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -967,12 +986,13 @@ namespace EMR.WebAPI.ehr.ansi5010
 
                     parts = claim.Condition.Vision.Split(new[] { ':' }).ToList();
                     seg["HI01"] = "BP:" + parts[0];
-                    
+
                     if (parts.Count > 1)
                     {
                         seg["HI02"] = "BO:" + parts[1];
                     }
 
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -983,11 +1003,12 @@ namespace EMR.WebAPI.ehr.ansi5010
                     parts = claim.Condition.Conditions.Split(new[] { ',' }).ToList();
                     seg = Segment.HI();
 
-                    for (int i=0, n=parts.Count; i<n; i++)
+                    for (int i = 0, n = parts.Count; i < n; i++)
                     {
                         seg["HI" + (i + 1).ToString().PadLeft(2, '0')] = "BG:" + parts[i];
                     }
 
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -1039,6 +1060,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["HCP15"] = (String.IsNullOrEmpty(rpr.Exception) == true) ?
                     String.Empty : rpr.Exception;
 
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
             }
             #endregion
@@ -1075,7 +1097,7 @@ namespace EMR.WebAPI.ehr.ansi5010
 
             #region Facility
             Facility facility = claim.Facility;
-                
+
             #region Facility Name
             seg = Segment.NM1("77", "2",
                 facility.Name, "", "", "",
@@ -1122,6 +1144,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     {
                         seg = Segment.AMT(amt.PayerPaid.Value);
                         seg["AMT01"] = "D";
+                        seg.FormatVals();
                         AppendToString(sb, seg.Output);
                     }
                 }
@@ -1134,6 +1157,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     {
                         seg = Segment.AMT(amt.NonCovered.Value);
                         seg["AMT01"] = "A8";
+                        seg.FormatVals();
                         AppendToString(sb, seg.Output);
                     }
                 }
@@ -1146,6 +1170,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     {
                         seg = Segment.AMT(amt.PatientLiability.Value);
                         seg["AMT01"] = "EAF";
+                        seg.FormatVals();
                         AppendToString(sb, seg.Output);
                     }
                 }
@@ -1155,7 +1180,7 @@ namespace EMR.WebAPI.ehr.ansi5010
 
             List<ClaimLine> claimLines = claim.ClaimLines.OrderBy(x => x.OrderLine).ToList();
 
-            foreach(ClaimLine line in claimLines)
+            foreach (ClaimLine line in claimLines)
             {
                 sb.Append(WriteClaimLineLoop(line));
             }
@@ -1229,6 +1254,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             {
                 seg = Segment.DTP("314", dates.DisabilityStart.Value);
                 seg["DTP02"] = "RD8";
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
             }
             else if (dates.DisabilityStart != null && dates.DisabilityEnd == null)
@@ -1430,17 +1456,19 @@ namespace EMR.WebAPI.ehr.ansi5010
             #region LX: Service Line Number
             seg = new Segment("LX");
             seg["LX01"] = line.OrderLine.ToString();
+            seg.FormatVals();
             AppendToString(sb, seg.Output);
             #endregion
 
-            #region Date of Service
-            seg = new Segment("DTP");
-            seg["DTP01"] = "472";
-            seg["DTP02"] = "RD8";
-            seg["DTP03"] = Segment.ParseDateTimeToString(line.StartDate);
-            seg["DTP04"] = Segment.ParseDateTimeToString(line.EndDate);
-            AppendToString(sb, seg.Output);
-            #endregion
+            //#region Date of Service
+            //seg = new Segment("DTP");
+            //seg["DTP01"] = "472";
+            //seg["DTP02"] = "RD8";
+            //seg["DTP03"] = Segment.ParseDateTimeToString(line.StartDate);
+            ////seg["DTP04"] = Segment.ParseDateTimeToString(line.EndDate);
+            //seg.FormatVals();
+            //AppendToString(sb, seg.Output);
+            //#endregion
 
             #region SV1: Profesional Service
             seg = new Segment("SV1");
@@ -1448,7 +1476,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             if (string.IsNullOrEmpty(line.Modifier) == false)
             {
                 string[] mods = line.Modifier.Split(new[] { ',' });
-                foreach(string m in mods)
+                foreach (string m in mods)
                 {
                     seg["SV101"] += ":" + m;
                 }
@@ -1461,6 +1489,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["SV111"] = line.EPSDT == true ? "Y" : String.Empty;
             seg["SV112"] = line.FamilyPlanning == true ? "Y" : String.Empty;
             seg["SV115"] = line.CopayExempt == true ? "0" : String.Empty;
+            seg.FormatVals();
             AppendToString(sb, seg.Output);
             #endregion
 
@@ -1470,12 +1499,13 @@ namespace EMR.WebAPI.ehr.ansi5010
             {
                 #region SV5: Durable Medical Equipment Service
                 seg = new Segment("SV5");
-                seg["seg01"] = "HC:" + dur.Procedure;
-                seg["seg02"] = "DA";
-                seg["seg03"] = dur.Quantity.ToString();
-                seg["seg04"] = (dur.Rental == null ? "" : dur.Rental.Value.ToString());
-                seg["seg05"] = (dur.Purchase == null ? "" : dur.Purchase.Value.ToString());
-                seg["seg06"] = dur.Frequency;
+                seg["SV501"] = "HC:" + dur.Procedure;
+                seg["SV502"] = "DA";
+                seg["SV503"] = dur.Quantity.ToString();
+                seg["SV504"] = (dur.Rental == null ? "" : dur.Rental.Value.ToString());
+                seg["SV505"] = (dur.Purchase == null ? "" : dur.Purchase.Value.ToString());
+                seg["SV506"] = dur.Frequency;
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
                 #endregion
 
@@ -1483,6 +1513,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg = new Segment("PWK");
                 seg["PWK01"] = "CT";
                 seg["PWK02"] = dur.Transmission;
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
                 #endregion
 
@@ -1491,6 +1522,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["CR301"] = dur.CertCode;
                 seg["CR302"] = "MO";
                 seg["CR303"] = (dur.CertQuantity == null ? String.Empty : dur.CertQuantity.Value.ToString());
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
                 #endregion
             }
@@ -1515,6 +1547,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg["PWK05"] = "AC";
                     seg["PWK06"] = att.Code;
                 }
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
             }
             #endregion
@@ -1532,6 +1565,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["CR106"] = (amb.Quantity == null ? String.Empty : amb.Quantity.Value.ToString());
                 seg["CR109"] = amb.RoundTrip;
                 seg["CR110"] = amb.Stretcher;
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
                 #endregion
 
@@ -1544,6 +1578,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["CRC05"] = amb.CertCode_3;
                 seg["CRC06"] = amb.CertCode_4;
                 seg["CRC07"] = amb.CertCode_5;
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
                 #endregion
 
@@ -1551,6 +1586,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg = new Segment("QTY");
                 seg["QTY01"] = "PT";
                 seg["QTY02"] = amb.PatientCount.ToString();
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
                 #endregion
             }
@@ -1567,6 +1603,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg["MEA01"] = dia.Code;
                     seg["MEA02"] = dia.Qualifier;
                     seg["MEA03"] = dia.Value;
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
             }
@@ -1583,8 +1620,9 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg["CN102"] = con.Amount == null ? String.Empty : con.Amount.Value.ToString();
                     seg["CN103"] = con.Percent == null ? String.Empty : con.Percent.Value.ToString();
                     seg["CN104"] = con.Code;
-                    seg["CN105"] = con.Discount == null ? String.Empty: con.Discount.Value.ToString();
+                    seg["CN105"] = con.Discount == null ? String.Empty : con.Discount.Value.ToString();
                     seg["CN106"] = con.Version;
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
             }
@@ -1601,6 +1639,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg["CRC01"] = "70";
                     seg["CRC02"] = sup.HospiceCode;
                     seg["CRC03"] = "65";
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -1611,6 +1650,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg = new Segment("QTY");
                     seg["QTY01"] = "FL";
                     seg["QTY02"] = (sup.ObsAnesUnits == null ? "" : sup.ObsAnesUnits.Value.ToString());
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -1621,6 +1661,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg = new Segment("AMT");
                     seg["AMT01"] = "T";
                     seg["AMT02"] = sup.SalesTaxAmount.Value.ToString();
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -1631,6 +1672,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg = new Segment("AMT");
                     seg["AMT01"] = "F4";
                     seg["AMT02"] = sup.PostageAmount.Value.ToString();
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -1640,6 +1682,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 {
                     seg = new Segment("K3");
                     seg["K301"] = sup.FileInfo;
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -1650,6 +1693,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg = new Segment("NTE");
                     seg["NTE01"] = sup.NoteCode;
                     seg["NTE02"] = sup.NoteDescription;
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -1660,6 +1704,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg = new Segment("NTE");
                     seg["NTE01"] = sup.ThirdPartyCode;
                     seg["NTE02"] = sup.ThirdPartyDescription;
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -1670,6 +1715,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg = new Segment("PS1");
                     seg["PS101"] = sup.PurchaseCode;
                     seg["PS101"] = sup.PurchaseAmount == null ? String.Empty : sup.PurchaseAmount.Value.ToString();
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
                 #endregion
@@ -1697,6 +1743,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg["HCP13"] = pri.RejectReason;
                     seg["HCP14"] = pri.ComplianceCode;
                     seg["HCP15"] = pri.ExceptionCode;
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
             }
@@ -1710,6 +1757,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg = new Segment("LIN");
                 seg["LIN02"] = dru.Qualifier;
                 seg["LIN03"] = dru.Code;
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
                 #endregion
 
@@ -1717,6 +1765,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg = new Segment("CTP");
                 seg["CTP04"] = dru.Quantity == null ? String.Empty : dru.Quantity.Value.ToString();
                 seg["CTP05"] = dru.Unit;
+                seg.FormatVals();
                 AppendToString(sb, seg.Output);
 
                 if (String.IsNullOrEmpty(dru.PrescriptionCode) == false)
@@ -1740,6 +1789,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                     seg["CRC02"] = dme.DMERC_Response;
                     seg["CRC03"] = dme.DMERC_Code;
                     seg["CRC04"] = dme.DMERC_Code2;
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
             }
@@ -1842,6 +1892,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                         seg["REF04"] = "2U:" + line.Reference.PriorIdentifier;
                     }
 
+                    seg.FormatVals();
                     AppendToString(sb, seg.Output);
                 }
 
@@ -1901,7 +1952,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 return sb.ToString();
             }
 
-            for(int i=0, n=ptr.Length; i<n; i++)
+            for (int i = 0, n = ptr.Length; i < n; i++)
             {
                 sb.Append(ptr[i]).Append(i < (n - 1) ? ":" : "");
             }
@@ -1919,6 +1970,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 dt.Month.ToString().PadLeft(2, '0'),
                 dt.Day.ToString().PadLeft(2, '0')
                 );
+            seg.FormatVals();
             segmentCount++;
             return seg.Output;
         }
@@ -1928,6 +1980,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             Segment seg = new Segment("REF");
             seg["REF01"] = qualifier;
             seg["REF02"] = identifier;
+            seg.FormatVals();
             return seg;
         }
 

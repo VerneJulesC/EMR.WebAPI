@@ -1,12 +1,9 @@
-﻿using System;
+﻿using EMR.WebAPI.ehr.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using EMR.WebAPI.ehr.models;
-using Newtonsoft.Json;
 
 namespace EMR.WebAPI.ehr.services
 {
@@ -26,7 +23,7 @@ namespace EMR.WebAPI.ehr.services
                 db.Database.Connection.ConnectionString = db.Database.Connection.ConnectionString.Replace("HK_MASTER", dbname);
                 List<Facility> facilities = db.Facilities.ToList();
 
-                foreach(Facility f in facilities)
+                foreach (Facility f in facilities)
                 {
                     vmList.Add(new FacilityViewModel(f));
                 }
@@ -71,7 +68,7 @@ namespace EMR.WebAPI.ehr.services
                     Data = facility
                 };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 status = new ServiceRequestStatus
                 {

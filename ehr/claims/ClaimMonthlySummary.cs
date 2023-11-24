@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Web;
+﻿using System.Globalization;
 
 namespace EMR.WebAPI.ehr.models
 {
@@ -21,7 +17,7 @@ namespace EMR.WebAPI.ehr.models
         {
             get
             {
-                return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(this.Month); 
+                return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(this.Month);
             }
         }
 

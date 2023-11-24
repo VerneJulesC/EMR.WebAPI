@@ -1,3 +1,4 @@
+using EMR.WebAPI.Areas.HelpPage.ModelDescriptions;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -5,7 +6,6 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using EMR.WebAPI.Areas.HelpPage.ModelDescriptions;
 
 namespace EMR.WebAPI.Areas.HelpPage
 {

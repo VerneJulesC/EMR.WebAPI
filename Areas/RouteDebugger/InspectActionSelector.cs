@@ -1,6 +1,6 @@
+using EMR.WebAPI.Areas.RouteDebugger.Components;
 using System.Linq;
 using System.Web.Http.Controllers;
-using EMR.WebAPI.Areas.RouteDebugger.Components;
 
 namespace EMR.WebAPI.Areas.RouteDebugger
 {

@@ -1,9 +1,9 @@
+using EMR.WebAPI.Areas.RouteDebugger.Models;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
-using EMR.WebAPI.Areas.RouteDebugger.Models;
 
 namespace EMR.WebAPI.Areas.RouteDebugger
 {

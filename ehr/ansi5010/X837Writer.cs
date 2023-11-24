@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Web;
 
 namespace EMR.WebAPI.ehr.ansi5010
 {
@@ -49,11 +46,7 @@ namespace EMR.WebAPI.ehr.ansi5010
 
         public static string WriteDate(DateTime dt)
         {
-            return String.Format("{0}{1}{2}",
-                dt.Year.ToString(),
-                dt.Month.ToString().PadLeft(2, '0'),
-                dt.Day.ToString().PadLeft(2, '0')
-            );
+            return dt.ToString("yyyyMMdd");
         }
 
         public static string WriteTime(DateTime dt)

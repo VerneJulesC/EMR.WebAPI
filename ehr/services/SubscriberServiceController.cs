@@ -1,10 +1,8 @@
-﻿using System;
+﻿using EMR.WebAPI.ehr.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using EMR.WebAPI.ehr.models;
 
 namespace EMR.WebAPI.ehr.services
 {
@@ -23,7 +21,7 @@ namespace EMR.WebAPI.ehr.services
                 db.Database.Connection.ConnectionString = db.Database.Connection.ConnectionString.Replace("HK_MASTER", dbname);
                 List<Subscriber> subscribers = db.Subscribers.ToList();
 
-                foreach(Subscriber sub in subscribers)
+                foreach (Subscriber sub in subscribers)
                 {
                     vmList.Add(new SubscriberViewModel(sub));
                 }
@@ -58,7 +56,7 @@ namespace EMR.WebAPI.ehr.services
             {
                 EHRDB db = new EHRDB();
                 db.Database.Connection.ConnectionString = db.Database.Connection.ConnectionString.Replace("HK_MASTER", dbname);
-                
+
                 //string ln, dob, dtStr;
                 //DateTime dt;
                 //string[] vals = parms.Split(new[] { '|' });
@@ -97,8 +95,8 @@ namespace EMR.WebAPI.ehr.services
                 }
                 */
 
-                subscribers = subscribers.OrderBy(x => x.LastName.ToUpper())
-                    .ThenBy(x => x.FirstName.ToUpper())
+                subscribers = subscribers.OrderBy(x => x.LastName, StringComparer.OrdinalIgnoreCase)
+                    .ThenBy(x => x.FirstName, StringComparer.OrdinalIgnoreCase)
                     .ToList();
                 resultsCount = subscribers.Count();
 
@@ -212,7 +210,7 @@ namespace EMR.WebAPI.ehr.services
                     Data = vmList
                 };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 status = new ServiceRequestStatus
                 {
@@ -252,7 +250,7 @@ namespace EMR.WebAPI.ehr.services
                 s.FirstName = subscriber.FirstName;
                 s.Gender = subscriber.Gender;
                 s.LastName = subscriber.LastName;
-                s.MiddleName     = subscriber.MiddleName;
+                s.MiddleName = subscriber.MiddleName;
                 s.Notes = subscriber.Notes;
                 s.Phone_1 = subscriber.Phone_1;
                 s.Phone_2 = subscriber.Phone_2;
@@ -372,7 +370,7 @@ namespace EMR.WebAPI.ehr.services
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 status = new ServiceRequestStatus
                 {

@@ -1,11 +1,9 @@
-﻿using System;
+﻿using EMR.WebAPI.ehr.models;
+using Org.BouncyCastle.Asn1.IsisMtt.X509;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using EMR.WebAPI.ehr.models;
 
 namespace EMR.WebAPI.ehr.services
 {
@@ -106,12 +104,16 @@ namespace EMR.WebAPI.ehr.services
         {
             ServiceRequestStatus status;
             Claim claim;
+            ClaimAccident cAcc;
+            ClaimDate cDate;
 
             try
             {
                 EHRDB db = new EHRDB();
                 db.Database.Connection.ConnectionString = db.Database.Connection.ConnectionString.Replace("HK_MASTER", dbname);
                 claim = db.Claims.Find(id);
+                cAcc = db.ClaimAccidents.FirstOrDefault(clm => clm.Id == claim.Id);
+                cDate = db.ClaimDates.FirstOrDefault(clm => clm.Id == claim.Id);
 
                 if (claim.Relationship == "18")
                 {
@@ -148,6 +150,9 @@ namespace EMR.WebAPI.ehr.services
                         line.Drug = new ClaimLineDrug();
                     }
                 }
+
+                claim.Accident = cAcc;
+                claim.Dates = cDate;
 
                 status = new ServiceRequestStatus
                 {
@@ -325,6 +330,10 @@ namespace EMR.WebAPI.ehr.services
             ServiceRequestStatus status;
             DateTime dtNow = DateTime.Now;
             Claim c;
+            ClaimAccident ca;
+            ClaimDate cd;
+            bool cax = false, cdx = false;  //if Accident and Date exist
+
 
             try
             {
@@ -333,6 +342,53 @@ namespace EMR.WebAPI.ehr.services
                 if (claim.Id > 0)
                 {
                     c = db.Claims.Find(claim.Id);
+                    ca = db.ClaimAccidents.FirstOrDefault(clm => clm.Id == claim.Id);
+                    if(ca == null)
+                    {
+                        ca = new ClaimAccident
+                        {
+                            Id = claim.Id,
+                            Causes = claim.Accident==null?null:claim.Accident.Causes,
+                            State = claim.Accident==null?null:claim.Accident.State,
+                            Country = claim.Accident==null?null:claim.Accident.Country,
+                            Date = claim.Accident==null?null:claim.Accident.Date
+                        };
+                    }
+                    else
+                    {
+                        cax = true;
+                    }
+                    ca.Id = claim.Id;
+                    ca.Causes = claim.Accident == null ? null : claim.Accident.Causes;
+                    ca.State = claim.Accident == null ? null : claim.Accident.State;
+                    ca.Country = claim.Accident == null ? null : claim.Accident.Country;
+                    ca.Date = claim.Accident == null ? null : claim.Accident.Date;
+
+                    cd = db.ClaimDates.FirstOrDefault(clm => clm.Id == claim.Id);
+                    if(cd == null)
+                    {
+                        cd = new ClaimDate
+                        {
+                            Id = claim.Id,
+                            LastWorked = claim.Dates == null ? null : claim.Dates.LastWorked,
+                            ReturnToWork = claim.Dates == null ? null : claim.Dates.ReturnToWork,
+                            Admission = claim.Dates == null ? null : claim.Dates.Admission,
+                            Discharge = claim.Dates == null ? null : claim.Dates.Discharge,
+                            OnsetOfCurrent = claim.Dates == null ? null : claim.Dates.OnsetOfCurrent,
+                            Other = claim.Dates == null ? null : claim.Dates.Other
+                        };
+                    }
+                    else
+                    {
+                        cdx = true;
+                    }
+                    cd.Id = claim.Id;
+                    cd.LastWorked = claim.Dates == null ? null : claim.Dates.LastWorked;
+                    cd.ReturnToWork = claim.Dates == null ? null : claim.Dates.ReturnToWork;
+                    cd.Admission = claim.Dates == null ? null : claim.Dates.Admission;
+                    cd.Discharge = claim.Dates == null ? null : claim.Dates.Discharge;
+                    cd.OnsetOfCurrent = claim.Dates == null ? null : claim.Dates.OnsetOfCurrent;
+                    cd.Other = claim.Dates == null ? null : claim.Dates.Other;
                 }
                 else
                 {
@@ -340,6 +396,24 @@ namespace EMR.WebAPI.ehr.services
                     {
                         DateCreated = dtNow,
                         SystemNoteKey = System.Guid.NewGuid().ToString()
+                    };
+                    ca = new ClaimAccident
+                    {
+                        Id = claim.Id,
+                        Causes = claim.Accident == null ? null : claim.Accident.Causes,
+                        State = claim.Accident == null ? null : claim.Accident.State,
+                        Country = claim.Accident == null ? null : claim.Accident.Country,
+                        Date = claim.Accident == null ? null : claim.Accident.Date
+                    };
+                    cd = new ClaimDate
+                    {
+                        Id = claim.Id,
+                        LastWorked = claim.Dates == null ? null : claim.Dates.LastWorked,
+                        ReturnToWork = claim.Dates == null ? null : claim.Dates.ReturnToWork,
+                        Admission = claim.Dates == null ? null : claim.Dates.Admission,
+                        Discharge = claim.Dates == null ? null : claim.Dates.Discharge,
+                        OnsetOfCurrent = claim.Dates == null ? null : claim.Dates.OnsetOfCurrent,
+                        Other = claim.Dates == null ? null : claim.Dates.Other
                     };
                 }
 
@@ -361,6 +435,8 @@ namespace EMR.WebAPI.ehr.services
                 c.PrimaryPayerId = claim.PrimaryPayerId;
                 c.SecondaryPayerId = claim.SecondaryPayerId;
                 c.EmploymentRelated = claim.EmploymentRelated;
+                c.AutoAccident = claim.AutoAccident;
+                c.OtherAccident = claim.OtherAccident;
                 c.OutsideLab = claim.OutsideLab;
                 c.OutsideLabCharges = claim.OutsideLabCharges;
                 c.DateOfService = claim.DateOfService;
@@ -485,6 +561,16 @@ namespace EMR.WebAPI.ehr.services
                 if (c.Id <= 0)
                 {
                     db.Claims.Add(c);
+                    db.SaveChanges();
+                    ca.Id = c.Id;
+                    cd.Id = c.Id;
+                }
+                if (!cax)
+                {
+                    db.ClaimAccidents.Add(ca);
+                }
+                if (!cdx) { 
+                    db.ClaimDates.Add(cd);
                 }
 
                 db.SaveChanges();
@@ -527,7 +613,8 @@ namespace EMR.WebAPI.ehr.services
                     // Filter by Last Name
                     if (String.IsNullOrEmpty(filters.LastName) == true)
                     {
-                        claims = db.Claims.ToList();
+                        claims = db.Claims.Where(c =>
+                                    c.PrimarySubscriber.LastName != null).ToList();
                     }
                     else
                     {
@@ -661,8 +748,8 @@ namespace EMR.WebAPI.ehr.services
                             c.Payment.AmountCopay > 0).ToList();
                     }
 
-                    claims = claims.OrderBy(c => c.PrimarySubscriber.LastName.ToUpper())
-                                .ThenBy(c => c.PrimarySubscriber.FirstName.ToUpper())
+                    claims = claims.OrderBy(c => c.PrimarySubscriber.LastName, StringComparer.OrdinalIgnoreCase)
+                                .ThenBy(c => c.PrimarySubscriber.FirstName, StringComparer.OrdinalIgnoreCase)
                                 .ToList();
 
                     Dictionary<string, Claim> dictClaims = new Dictionary<string, Claim>();

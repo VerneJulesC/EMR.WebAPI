@@ -1,10 +1,8 @@
-﻿using System;
+﻿using EMR.WebAPI.ehr.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using EMR.WebAPI.ehr.models;
 
 namespace EMR.WebAPI.ehr.services
 {
@@ -123,7 +121,7 @@ namespace EMR.WebAPI.ehr.services
             EHRDB db = new EHRDB();
             List<ErrorCode> codes = db.ErrorCodes.ToList();
 
-            foreach(ErrorCode c in codes)
+            foreach (ErrorCode c in codes)
             {
                 errorCodes[c.Id.ToString()] = c.Description;
             }

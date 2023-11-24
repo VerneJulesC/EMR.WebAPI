@@ -1,3 +1,5 @@
+using EMR.WebAPI.Areas.HelpPage.ModelDescriptions;
+using EMR.WebAPI.Areas.HelpPage.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,8 +13,6 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using EMR.WebAPI.Areas.HelpPage.ModelDescriptions;
-using EMR.WebAPI.Areas.HelpPage.Models;
 
 namespace EMR.WebAPI.Areas.HelpPage
 {

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using EMR.WebAPI.ehr.ansi5010;
+using EMR.WebAPI.ehr.models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,11 +11,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
-using EMR.WebAPI.ehr.models;
-using iTextSharp;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using EMR.WebAPI.ehr.ansi5010;
 
 namespace EMR.WebAPI.ehr.services
 {
@@ -674,7 +673,7 @@ namespace EMR.WebAPI.ehr.services
 
             // Reset everything to blank string
             Dictionary<string, string> map = new Dictionary<string, string>();
-            foreach(string key in keys)
+            foreach (string key in keys)
             {
                 map[key] = String.Empty;
             }
@@ -701,7 +700,7 @@ namespace EMR.WebAPI.ehr.services
             map["1-champva"] = claim.ClaimPayerType.ToUpper() == "CHIAMPVA" ? "X" : "";
             map["1-ghi"] = claim.ClaimPayerType.ToUpper() == "GHI" ? "X" : "";
             map["1-feca"] = claim.ClaimPayerType.ToUpper() == "FECA" ? "X" : "";
-            map["1-other"] = claim.ClaimPayerType.ToUpper() == "OTHER" ? "X": "";
+            map["1-other"] = claim.ClaimPayerType.ToUpper() == "OTHER" ? "X" : "";
             map["1-a"] = claim.PrimaryPayerMemberID;
 
             map["2"] = patient == null ?
@@ -711,7 +710,7 @@ namespace EMR.WebAPI.ehr.services
                 GetDateTimeValue(patient.DateOfBirth);
             map["3-mm"] = dt == null ? "" : dt.Month.ToString().PadLeft(2, '0');
             map["3-dd"] = dt == null ? "" : dt.Day.ToString().PadLeft(2, '0');
-            map["3-yy"] = dt == null ? "" : dt.Year.ToString();
+            map["3-yy"] = dt == null ? "" : (dt.Year%100).ToString().PadLeft(2, '0');
             map["3-m"] = patient == null ?
                 (subPrimary.Gender == "M" == true ? "X" : "") :
                 (patient.Gender == "M" == true ? "X" : "");
@@ -750,7 +749,7 @@ namespace EMR.WebAPI.ehr.services
             map["7-city"] = subPrimary.City;
             map["7-state"] = subPrimary.State;
             map["7-zip"] = subPrimary.Zip;
-            map["7-phonearea"] = 
+            map["7-phonearea"] =
                 String.IsNullOrEmpty(subPrimary.Phone_1) == true ? "" : subPrimary.Phone_1.Substring(0, 3);
             map["7-phonenum"] =
                 String.IsNullOrEmpty(subPrimary.Phone_1) == true ? "" : subPrimary.Phone_1.Substring(3);
@@ -765,7 +764,21 @@ namespace EMR.WebAPI.ehr.services
             map["10-ayes"] = claim.EmploymentRelated == true ? "X" : "";
             map["10-ano"] = claim.EmploymentRelated == true ? "" : "X";
 
-            if (claim.Accident == null)
+            map["10-bno"] = (claim.AutoAccident == null || claim.AutoAccident != "C") ? "X" : "";
+            map["10-byes"] = claim.AutoAccident == "C" ? "X" : "";
+            if(claim.Accident != null)
+            {
+                map["10-bstate"] = String.IsNullOrEmpty(claim.Accident.State) == true ? "" : claim.Accident.State;
+            }
+            else
+            {
+                map["10-bstate"] = "";
+            }
+            map["10-cyes"] = claim.OtherAccident == "C" ? "X" : "";
+            map["10-cno"] = (claim.OtherAccident == null || claim.OtherAccident != "C") ? "X" : "";
+
+
+            /*if (claim.Accident == null)
             {
                 map["10-bno"] = "X";
                 map["10-cno"] = "X";
@@ -775,12 +788,12 @@ namespace EMR.WebAPI.ehr.services
                 map["10-byes"] = String.IsNullOrEmpty(claim.Accident.Causes) == true ? "" : "X";
                 map["10-bstate"] = String.IsNullOrEmpty(claim.Accident.Causes) == true ? claim.Accident.State : "";
                 map["10-cyes"] = String.IsNullOrEmpty(claim.Accident.Causes) == true ? "" : "X";
-            }
+            }*/
 
             dt = GetDateTimeValue(subPrimary.DateOfBirth);
             map["11-amm"] = dt.Month.ToString().PadLeft(2, '0');
             map["11-add"] = dt.Day.ToString().PadLeft(2, '0');
-            map["11-ayy"] = dt.Year.ToString();
+            map["11-ayy"] = (dt.Year%100).ToString().PadLeft(2, '0');
             map["11-am"] = (subPrimary.Gender == "M" == true ? "X" : "");
             map["11-af"] = (subPrimary.Gender == "M" == true ? "" : "X");
             map["11-c"] = String.Empty;
@@ -801,7 +814,7 @@ namespace EMR.WebAPI.ehr.services
                 {
                     map["14-mm"] = dt.Month.ToString().PadLeft(2, '0');
                     map["14-dd"] = dt.Day.ToString().PadLeft(2, '0');
-                    map["14-yy"] = dt.Year.ToString();
+                    map["14-yy"] = (dt.Year % 100).ToString().PadLeft(2, '0');
                 }
 
                 dt = GetDateTimeValue(claim.Dates.Other);
@@ -809,7 +822,7 @@ namespace EMR.WebAPI.ehr.services
                 {
                     map["15-mm"] = dt.Month.ToString().PadLeft(2, '0');
                     map["15-dd"] = dt.Day.ToString().PadLeft(2, '0');
-                    map["15-yy"] = dt.Year.ToString();
+                    map["15-yy"] = (dt.Year % 100).ToString().PadLeft(2, '0');
                 }
 
                 dt = GetDateTimeValue(claim.Dates.LastWorked);
@@ -817,7 +830,7 @@ namespace EMR.WebAPI.ehr.services
                 {
                     map["16-mmfrom"] = dt.Month.ToString().PadLeft(2, '0');
                     map["16-ddfrom"] = dt.Day.ToString().PadLeft(2, '0');
-                    map["16-yyfrom"] = dt.Year.ToString();
+                    map["16-yyfrom"] = (dt.Year % 100).ToString().PadLeft(2, '0');
                 }
 
                 dt = GetDateTimeValue(claim.Dates.ReturnToWork);
@@ -825,7 +838,7 @@ namespace EMR.WebAPI.ehr.services
                 {
                     map["16-mmto"] = dt.Month.ToString().PadLeft(2, '0');
                     map["16-ddto"] = dt.Day.ToString().PadLeft(2, '0');
-                    map["16-yyto"] = dt.Year.ToString();
+                    map["16-yyto"] = (dt.Year % 100).ToString().PadLeft(2, '0');
                 }
 
                 dt = GetDateTimeValue(claim.Dates.Admission);
@@ -833,7 +846,7 @@ namespace EMR.WebAPI.ehr.services
                 {
                     map["18-mmfrom"] = dt.Month.ToString().PadLeft(2, '0');
                     map["18-ddfrom"] = dt.Day.ToString().PadLeft(2, '0');
-                    map["18-yyfrom"] = dt.Year.ToString();
+                    map["18-yyfrom"] = (dt.Year % 100).ToString().PadLeft(2, '0');
                 }
 
                 dt = GetDateTimeValue(claim.Dates.Discharge);
@@ -841,7 +854,7 @@ namespace EMR.WebAPI.ehr.services
                 {
                     map["18-mmto"] = dt.Month.ToString().PadLeft(2, '0');
                     map["18-ddto"] = dt.Day.ToString().PadLeft(2, '0');
-                    map["18-yyto"] = dt.Year.ToString();
+                    map["18-yyto"] = (dt.Year % 100).ToString().PadLeft(2, '0');
                 }
             }
 
@@ -887,12 +900,12 @@ namespace EMR.WebAPI.ehr.services
                 dt = GetDateTimeValue(claim.DateOfService);
                 map[pre + "mmfrom"] = dt.Month.ToString().PadLeft(2, '0');
                 map[pre + "ddfrom"] = dt.Day.ToString().PadLeft(2, '0');
-                map[pre + "yyfrom"] = dt.Year.ToString().Substring(2);
+                map[pre + "yyfrom"] = (dt.Year % 100).ToString().PadLeft(2, '0');
 
                 dt = GetDateTimeValue(claim.DateOfService);
                 map[pre + "mmto"] = dt.Month.ToString().PadLeft(2, '0');
                 map[pre + "ddto"] = dt.Day.ToString().PadLeft(2, '0');
-                map[pre + "yyto"] = dt.Year.ToString().Substring(2);
+                map[pre + "yyto"] = (dt.Year % 100).ToString().PadLeft(2, '0');
 
                 map[pre + "pos"] = claim.PlaceOfService.Code;
                 map[pre + "emg"] = "";
@@ -967,11 +980,11 @@ namespace EMR.WebAPI.ehr.services
             //EHRDB db = new EHRDB();
             //db.Database.Connection.ConnectionString = db.Database.Connection.ConnectionString.Replace("HK_MASTER", dbname);
             PayTo payTo = payToes.Where(x => x.BillingProviderId == claim.BillingProvider.Id &&
-                                            x.RenderingProviderId == claim.RenderingProvider.Id).First();
+                                            x.RenderingProviderId == claim.RenderingProvider.Id).FirstOrDefault();
 
             map["33-name"] = claim.BillingProvider.LastName;
-            map["33-line1"] = payTo.Address_1;
-            map["33-line2"] = payTo.City + ", " + payTo.State + " " + payTo.Zip;
+            map["33-line1"] = (payTo == null)? String.Empty : payTo.Address_1;
+            map["33-line2"] = (payTo == null)? (String.Empty + ", " + String.Empty + " " + String.Empty) : (payTo.City + ", " + payTo.State + " " + payTo.Zip);
             map["33-npi"] = claim.BillingProvider.NPI;
 
             return map;
@@ -1167,7 +1180,7 @@ namespace EMR.WebAPI.ehr.services
             {
                 output = x837.WriteX837(null, true); // true -> new line separator per segment
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 output = ex.ToString();
             }
@@ -1193,6 +1206,8 @@ namespace EMR.WebAPI.ehr.services
             List<Claim> claims = new List<Claim>();
             int id;
             Claim c;
+            ClaimAccident ca;
+            ClaimDate cd;
 
             foreach (string s in idString.Split(new[] { ',' }))
             {
@@ -1207,6 +1222,10 @@ namespace EMR.WebAPI.ehr.services
                     c = db.Claims.Find(id);
                     if (c != null)
                     {
+                        ca = db.ClaimAccidents.FirstOrDefault(clm => clm.Id == c.Id);
+                        cd = db.ClaimDates.FirstOrDefault(clm => clm.Id == c.Id);
+                        c.Accident = ca;
+                        c.Dates = cd;
                         claims.Add(c);
                     }
                 }

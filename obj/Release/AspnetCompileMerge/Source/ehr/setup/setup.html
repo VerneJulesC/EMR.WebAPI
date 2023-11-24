@@ -1,0 +1,36 @@
+﻿<div class="container-fluid ehr-content">
+
+    <!-- Page Header -->
+    <div class="ehr-page-header row">
+        <div class="col-sm-5">
+            <span>SETUP</span>
+        </div>
+    </div>
+
+    <!-- Setup container -->
+    <div class="ehr-row clearfix">
+        <ul class="subtab-nav">
+            <li><a ui-sref="setup.providers" ui-sref-active="ehr-subtab-selected">Providers</a></li>
+            <li><a ui-sref="setup.facilities" ui-sref-active="ehr-subtab-selected">Facilities</a></li>
+            <li><a ui-sref="setup.refproviders" ui-sref-active="ehr-subtab-selected">Referring Providers</a></li>
+            <li><a ui-sref="setup.billing" ui-sref-active="ehr-subtab-selected">Billing</a></li>
+        </ul>
+
+        <div class="ehr-subtab-content">
+            <br />
+
+            <!-- Subtab content -->
+            <ui-view>
+                <div class="ehr-row clearfix">
+                    <div class="col-sm-12">
+                        <div class="ehr-row clearfix">
+                            <img src="/ehr/images/loading_1.gif" />
+                        </div>
+                    </div>
+                </div>
+            </ui-view>
+
+        </div>
+    </div>
+
+</div>

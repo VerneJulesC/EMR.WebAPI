@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web;
 
 namespace EMR.WebAPI.ehr.models
 {
@@ -75,7 +73,7 @@ namespace EMR.WebAPI.ehr.models
             {
                 sb.Append(stripped);
             }
-            
+
             return sb.ToString();
         }
 

@@ -1,16 +1,14 @@
-﻿using System;
+﻿using EMR.WebAPI.ehr.models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using EMR.WebAPI.ehr.models;
 
 namespace EMR.WebAPI.ehr.ansi5010
 {
     public class BillingProviderSegment
     {
-        
+
         Dictionary<string, string> CONFIG;
-        
+
         public BillingProviderSegment(Provider provider)
         {
             Provider = provider;
@@ -109,7 +107,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["PER01"] = "IC";
                 seg["PER02"] = Provider.FirstName + " " + Provider.LastName;
 
-                for(int i=1; i <= 3; i++)
+                for (int i = 1; i <= 3; i++)
                 {
                     if (String.IsNullOrEmpty(Provider.Phone_1) == false)
                     {
@@ -153,39 +151,39 @@ namespace EMR.WebAPI.ehr.ansi5010
                     // Billing Provider Name
                     NM1.Output;
 
-                    // Billing Provider Contact Information
-                    
-                    // Billing Provider Address
-                    //output += n3.Output;
+                // Billing Provider Contact Information
 
-                    // Billing Provider City, State, Zip Code
-                    //output += n4.Output;
+                // Billing Provider Address
+                //output += n3.Output;
 
-                    // Billing Provider Tax Identification
-                    //output += refTax.Output;
+                // Billing Provider City, State, Zip Code
+                //output += n4.Output;
 
-                    // Billing Provider UPIN/License Information
-                    /*if (String.IsNullOrEmpty(nm1.NM109) == true)
-                    {
-                        output += refUpin.Output;
-                    }
+                // Billing Provider Tax Identification
+                //output += refTax.Output;
 
-
-                HL hl = new HL(hlevel)
+                // Billing Provider UPIN/License Information
+                /*if (String.IsNullOrEmpty(nm1.NM109) == true)
                 {
-                    HL03 = "20",
-                    HL04 = "1"
-                };
-                output += hl.Output;
-                PRV prv = new PRV("BI")
-                {
-                    PRV02 = "PXC",
-                    PRV03 = CONFIG["2000A_PRV03"]
-                };
-                output += (String.IsNullOrEmpty(CONFIG["2000A_PRV03"]) == true ?
-                    String.Empty :
-                    prv.Output
-                );*/
+                    output += refUpin.Output;
+                }
+
+
+            HL hl = new HL(hlevel)
+            {
+                HL03 = "20",
+                HL04 = "1"
+            };
+            output += hl.Output;
+            PRV prv = new PRV("BI")
+            {
+                PRV02 = "PXC",
+                PRV03 = CONFIG["2000A_PRV03"]
+            };
+            output += (String.IsNullOrEmpty(CONFIG["2000A_PRV03"]) == true ?
+                String.Empty :
+                prv.Output
+            );*/
 
                 //return output;
 

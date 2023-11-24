@@ -1,8 +1,8 @@
+using EMR.WebAPI.Areas.HelpPage.ModelDescriptions;
+using EMR.WebAPI.Areas.HelpPage.Models;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using EMR.WebAPI.Areas.HelpPage.ModelDescriptions;
-using EMR.WebAPI.Areas.HelpPage.Models;
 
 namespace EMR.WebAPI.Areas.HelpPage.Controllers
 {

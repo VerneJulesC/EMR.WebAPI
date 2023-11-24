@@ -1,9 +1,8 @@
-﻿using System;
+﻿using EMR.WebAPI.ehr.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web;
-using EMR.WebAPI.ehr.models;
 
 namespace EMR.WebAPI.ehr.ansi5010
 {
@@ -26,7 +25,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 return;
             }
 
-            for(int i=1; i<=pCount; i++)
+            for (int i = 1; i <= pCount; i++)
             {
                 Items.Add(segmentID + i.ToString().PadLeft(2, '0'), String.Empty);
             }
@@ -149,12 +148,26 @@ namespace EMR.WebAPI.ehr.ansi5010
         }
         #endregion
 
+        public void FormatVals()
+        {
+            foreach (var item in Items.ToList())
+            {
+                string newval = X837Config.FormatVal(ID, item.Key, item.Value);
+                if(newval == null)
+                {
+                    newval = X837Config.OtherFormatVal(ID, item.Key, item.Value);
+                }
+                Items[item.Key] = newval;
+            }
+        }
+
         #region Static Methods
         public static Segment AMT(decimal amt)
         {
             Segment seg = new Segment("AMT");
             seg["AMT01"] = "F5";
             seg["AMT02"] = amt.ToString();
+            seg.FormatVals();
 
             return seg;
         }
@@ -173,11 +186,12 @@ namespace EMR.WebAPI.ehr.ansi5010
             claimDate.Day.ToString().PadLeft(2, '0'));*/
 
             seg["BHT05"] = X837Writer.WriteTime(claimDate);
-                /*String.Format("{0}{1}",
-                claimDate.Hour.ToString().PadLeft(2, '0'),
-                claimDate.Minute.ToString().PadLeft(2, '0'));*/
+            /*String.Format("{0}{1}",
+            claimDate.Hour.ToString().PadLeft(2, '0'),
+            claimDate.Minute.ToString().PadLeft(2, '0'));*/
 
             seg["BHT06"] = tranType;
+            seg.FormatVals();
 
             segmentCount++;
             return seg;
@@ -188,6 +202,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("CAS");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -204,7 +219,7 @@ namespace EMR.WebAPI.ehr.ansi5010
 
             seg["CLM12"] = claim.SpecialProgram;
             seg["CLM20"] = claim.DelayReason;
-
+            seg.FormatVals();
             segmentCount++;
             return seg;
         }
@@ -214,6 +229,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("CN1");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -222,6 +238,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("CR1");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -230,6 +247,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("CR2");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -238,6 +256,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("CRC");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -246,6 +265,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("CTP");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -259,6 +279,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 dob.Day.ToString().PadLeft(2, '0'));
             seg["DMG03"] = gender;
 
+            seg.FormatVals();
             segmentCount++;
             return seg;
         }
@@ -270,6 +291,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["DTP02"] = "D8";
             seg["DTP03"] = ParseDateTimeToString(dt);
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -277,6 +299,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("FRM");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -284,6 +307,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("GE");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -291,6 +315,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("GS");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -299,6 +324,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("HCP");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -307,6 +333,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("HI");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -318,6 +345,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["HL03"] = code.ToString();
             //seg["HL04"] = code;
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -327,6 +355,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["IEA01"] = "1";
             seg["IEA01"] = interCtrl;
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -335,6 +364,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("ISA");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -343,6 +373,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("K3");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -351,6 +382,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("LIN");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -360,6 +392,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["LQ01"] = qualifier;
             seg["LQ02"] = code;
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -368,6 +401,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             Segment seg = new Segment("LX");
             seg["LX01"] = counter.ToString();
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -376,6 +410,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("MEA");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -384,6 +419,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("MOA");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -396,6 +432,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["N302"] = address2;
             }
 
+            seg.FormatVals();
             segmentCount++;
             return seg;
         }
@@ -407,6 +444,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["N402"] = state;
             seg["N403"] = zip;
 
+            seg.FormatVals();
             segmentCount++;
             return seg;
         }
@@ -443,6 +481,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["NM108"] = codeQualifier;
             seg["NM109"] = code;
 
+            seg.FormatVals();
             segmentCount++;
             return seg;
         }
@@ -453,6 +492,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["NTE01"] = code;
             seg["NTE02"] = description;
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -461,6 +501,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("OI");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -485,6 +526,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 seg["PAT09"] = "Y";
             }
 
+            seg.FormatVals();
             segmentCount++;
             return seg;
         }
@@ -524,6 +566,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 }
             }
 
+            seg.FormatVals();
             segmentCount++;
             return seg;
         }
@@ -535,6 +578,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["PRV02"] = qualifier;
             seg["PRV03"] = identification;
 
+            seg.FormatVals();
             segmentCount++;
             return seg;
         }
@@ -544,6 +588,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("PS1");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -552,6 +597,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("PWK");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -560,6 +606,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("QTY");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -569,6 +616,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["REF01"] = qualifier;
             seg["REF02"] = identification;
 
+            seg.FormatVals();
             segmentCount++;
             return seg;
         }
@@ -582,6 +630,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["SBR01"] = "P";
 
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -591,6 +640,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["SE01"] = segmentCount.ToString();
             seg["SE02"] = controlNumber;
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -601,6 +651,7 @@ namespace EMR.WebAPI.ehr.ansi5010
             seg["ST02"] = controlNumber;
             seg["ST03"] = "005010X222A1";
 
+            seg.FormatVals();
             segmentCount++;
             return seg;
         }
@@ -610,6 +661,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("SV1");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -618,6 +670,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("SV5");
 
+            seg.FormatVals();
             return seg;
         }
 
@@ -626,6 +679,7 @@ namespace EMR.WebAPI.ehr.ansi5010
         {
             Segment seg = new Segment("SVD");
 
+            seg.FormatVals();
             return seg;
         }
 

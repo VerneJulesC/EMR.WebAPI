@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Web;
 
 namespace EMR.WebAPI.ehr.services
 {
@@ -67,7 +65,7 @@ namespace EMR.WebAPI.ehr.services
             MemberExpression mx = Expression.Property(px, filter.PropertyName);
             ConstantExpression cx = Expression.Constant(filter.Value);
 
-            switch(filter.Operation)
+            switch (filter.Operation)
             {
                 case Op.Equals:
                     return Expression.Equal(mx, cx);

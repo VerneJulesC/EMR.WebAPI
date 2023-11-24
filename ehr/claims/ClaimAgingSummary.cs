@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace EMR.WebAPI.ehr.models
+﻿namespace EMR.WebAPI.ehr.models
 {
     public class ClaimAgingSummary
     {

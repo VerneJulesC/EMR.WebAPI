@@ -1,15 +1,13 @@
-﻿using System;
+﻿using EMR.WebAPI.ehr.models;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Http;
-using EMR.WebAPI.ehr.models;
-using Microsoft.IdentityModel.Tokens;
 
 namespace EMR.WebAPI.ehr.services
 {
@@ -41,9 +39,10 @@ namespace EMR.WebAPI.ehr.services
             byte[] hash = pbkdf2.GetBytes(20);
 
             int ok = 1;
-            for (int i=0; i<20; i++)
+            for (int i = 0; i < 20; i++)
             {
-                if (hashBytes[i + 16] != hash[i]) {
+                if (hashBytes[i + 16] != hash[i])
+                {
                     ok = 0;
                 }
             }
@@ -232,7 +231,7 @@ namespace EMR.WebAPI.ehr.services
                     Data = pref
                 };
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 status = new ServiceRequestStatus
                 {
@@ -277,7 +276,7 @@ namespace EMR.WebAPI.ehr.services
         public IHttpActionResult ChangeDB(string dbname)
         {
             ServiceRequestStatus status;
-            List<ProviderViewModel> vmList = new List<ProviderViewModel>(); 
+            List<ProviderViewModel> vmList = new List<ProviderViewModel>();
 
             try
             {

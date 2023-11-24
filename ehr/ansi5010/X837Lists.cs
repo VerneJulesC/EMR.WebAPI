@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace EMR.WebAPI.ehr.ansi5010
 {
@@ -124,7 +121,7 @@ namespace EMR.WebAPI.ehr.ansi5010
                 };
             }
         }
-         
+
         public static Dictionary<string, string> DurableTransmission
         {
             get

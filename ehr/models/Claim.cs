@@ -68,6 +68,8 @@ namespace EMR.WebAPI.ehr.models
         public string ClaimPayerType { get; set; }
         public Nullable<System.DateTime> DateModified { get; set; }
         public Nullable<int> ReferringProviderId { get; set; }
+        public string AutoAccident { get; set; }
+        public string OtherAccident { get; set; }
     
         public virtual PlaceOfService PlaceOfService { get; set; }
         public virtual Subscriber PrimarySubscriber { get; set; }
