@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Properties",
+    "\\Properties\\PublishProfiles"
   ],
-  "SelectedNode": "\\EMR.WebAPI.sln",
   "PreviewInSolutionExplorer": false
 }
